@@ -2,7 +2,8 @@ import boto3
 import botocore
 import paramiko
 
-ec2 = boto3.resource('ec2')
+s = boto3.Session(region_name="us-east-1")
+ec2 = s.resource('ec2')
 
 KEY_PAIR = ''
 IMAGE_ID = ''
@@ -22,11 +23,9 @@ try:
 
     # Execute a command(cmd) after connecting/ssh to an instance
     stdin, stdout, stderr = client.exec_command(cmd)
-    print stdout.read()
+    print(stdout.read())
 
     # close the client connection once the job is done
     client.close()
-    break
-
-except Exception, e:
-    print e
+except Exception as e:
+    print(e)
