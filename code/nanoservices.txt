@@ -1,0 +1,3 @@
+https://stackoverflow.com/questions/35305245/programmatically-create-and-deploy-on-demand-ec2
+REST API
+https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ec2.html#EC2.Client.run_instances
