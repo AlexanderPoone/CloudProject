@@ -9,3 +9,5 @@ Modern cloud computing applications are usually architected as distributed colle
 We are going to build a microservice pipeline. The pipeline is similar to a DAG (directed acyclic of graph), like Apache Airflow or Kafka.
 
 Amazon EC2 instances are created on demand using the Boto3 library, depending on the input data size.
+
+<!-- Grid computing: needs to stop other instances once the solution is found. -->
