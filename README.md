@@ -10,6 +10,8 @@ DynamoDB is used to store the key-value pairs of <block id; binary content>, <fi
 
 The front end is planned to be written in Qt (or Flutter), so that it can be used on mobile devices.
 
+The master EC2 node will hold the Flask REST endpoints.
+
 Amazon EC2 instances are created on demand using the Boto3 library, depending on the input data size.
 
 ## 0. Ideas
