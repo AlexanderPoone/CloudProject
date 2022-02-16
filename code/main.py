@@ -26,12 +26,12 @@ def connect(publicIp, instanceNumber, retries=5, master_ip=None):
             stdin, stdout, stderr = client.exec_command('echo ThisIsTheMaster')
         else:
             stdin, stdout, stderr = client.exec_command(f'ping -c 4 {master_ip}')
-        print(f'{stdout.read()}; Retrying...')
+        print(stdout.read())
 
         # close the client connection once the job is done
         client.close()
     except Exception as e:
-        print(e)
+        print(f'{e}; Retrying...')
         if retries > 0:
             retries -= 1
             connect(publicIp, instanceNumber, retries, master_ip)
