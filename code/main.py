@@ -28,6 +28,10 @@ def connect(publicIp, instanceNumber, retries=5, master_ip=None):
             stdin, stdout, stderr = client.exec_command(f'ping -c 4 {master_ip}')
         print(stdout.read())
 
+        stdin, stdout, stderr = client.exec_command(f'jps')
+        print(stdout.read())
+        print('------------------------------------------------------------')
+
         # close the client connection once the job is done
         client.close()
     except Exception as e:
