@@ -1,8 +1,17 @@
+'''
+EC2 ImageIds:
+
+X ami-09397c199cf1dfdab: Ubuntu w/ Flask X
+ami-032ac9ac998363686: Spark-Ipython-preconfigured
+'''
+
 import boto3
 import botocore
 import paramiko
 from os.path import expanduser
 from time import sleep
+
+##############################################################################
 
 key = paramiko.RSAKey.from_private_key_file(expanduser('~/Downloads/bruh.pem'))
 client = paramiko.SSHClient()
@@ -25,25 +34,38 @@ def connect(publicIp, instanceNumber, retries=5):
             connect(publicIp, instanceNumber, retries)
 
 NUM_WORKERS = 3
-NUM_INSTANCES = NUM_WORKERS + 1
 KEY_PAIR = 'bruh'
 
 s = boto3.Session(
     region_name='us-east-1')
 ec2 = s.resource('ec2')
 
-i = ec2.create_instances(ImageId='ami-04505e74c0741db8d',
+##############################################################################
+
+i = ec2.create_instances(ImageId='ami-032ac9ac998363686',
     InstanceType='t2.micro',
     SecurityGroups=['launch-wizard-1'],
-    MaxCount=NUM_INSTANCES,
+    MaxCount=1,
     KeyName=KEY_PAIR, 
-    MinCount=NUM_INSTANCES)
+    MinCount=1)
+i[0].wait_until_running()
+i[0].reload()
+print(f'SSH into Master @{i[0].public_ip_address}...')
 
+connect(i[0].public_ip_address, 0)
 
+##############################################################################
+
+i = ec2.create_instances(ImageId='ami-032ac9ac998363686',
+    InstanceType='t2.micro',
+    SecurityGroups=['launch-wizard-1'],
+    MaxCount=NUM_WORKERS,
+    KeyName=KEY_PAIR, 
+    MinCount=NUM_WORKERS)
 for instance in range(len(i)):
     i[instance].wait_until_running()
     i[instance].reload()
 
-    print(f'SSH into {i[instance].public_ip_address}...')
+    print(f'SSH into Worker {instance} @{i[instance].public_ip_address}...')
 
-    connect(i[instance].public_ip_address, instance)
+    connect(i[instance].public_ip_address, instance+1)
