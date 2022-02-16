@@ -17,13 +17,16 @@ key = paramiko.RSAKey.from_private_key_file(expanduser('~/Downloads/bruh.pem'))
 client = paramiko.SSHClient()
 client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
 
-def connect(publicIp, instanceNumber, retries=5):
+def connect(publicIp, instanceNumber, retries=5, master_ip=None):
     try:
         client.connect(hostname=publicIp, username="ubuntu", pkey=key, timeout=120)
 
         # Execute a command(cmd) after connecting/ssh to an instance
-        stdin, stdout, stderr = client.exec_command('echo hahaha')
-        print(stdout.read())
+        if master_ip is None:
+            stdin, stdout, stderr = client.exec_command('echo ThisIsTheMaster')
+        else:
+            stdin, stdout, stderr = client.exec_command(f'ping -c 4 {master_ip}')
+        print(f'{stdout.read()}; Retrying...')
 
         # close the client connection once the job is done
         client.close()
@@ -31,7 +34,7 @@ def connect(publicIp, instanceNumber, retries=5):
         print(e)
         if retries > 0:
             retries -= 1
-            connect(publicIp, instanceNumber, retries)
+            connect(publicIp, instanceNumber, retries, master_ip)
 
 NUM_WORKERS = 3
 KEY_PAIR = 'bruh'
@@ -42,30 +45,30 @@ ec2 = s.resource('ec2')
 
 ##############################################################################
 
-i = ec2.create_instances(ImageId='ami-032ac9ac998363686',
+m = ec2.create_instances(ImageId='ami-032ac9ac998363686',
     InstanceType='t2.micro',
     SecurityGroups=['launch-wizard-1'],
     MaxCount=1,
     KeyName=KEY_PAIR, 
     MinCount=1)
-i[0].wait_until_running()
-i[0].reload()
-print(f'SSH into Master @{i[0].public_ip_address}...')
+m[0].wait_until_running()
+m[0].reload()
+print(f'SSH into Master @{m[0].public_ip_address}...')
 
-connect(i[0].public_ip_address, 0)
+connect(m[0].public_ip_address, 0)
 
 ##############################################################################
 
-i = ec2.create_instances(ImageId='ami-032ac9ac998363686',
+w = ec2.create_instances(ImageId='ami-032ac9ac998363686',
     InstanceType='t2.micro',
     SecurityGroups=['launch-wizard-1'],
     MaxCount=NUM_WORKERS,
     KeyName=KEY_PAIR, 
     MinCount=NUM_WORKERS)
-for instance in range(len(i)):
-    i[instance].wait_until_running()
-    i[instance].reload()
+for instance in range(len(w)):
+    w[instance].wait_until_running()
+    w[instance].reload()
 
-    print(f'SSH into Worker {instance} @{i[instance].public_ip_address}...')
+    print(f'SSH into Worker {instance} @{w[instance].public_ip_address}...')
 
-    connect(i[instance].public_ip_address, instance+1)
+    connect(w[instance].public_ip_address, instance+1, master_ip=m[0].public_ip_address)
