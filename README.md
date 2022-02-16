@@ -6,7 +6,7 @@
 ## Objective
 We are writing a lightweight cloud storage deduplication program. Issues scalability, deduplication granularity and usefulness, and security will be addressed.
 
-DynamoDB is used to store the key-value pairs of <block id, binary content>, <user id, filepath, file sequence, metadata>. (maybe more)
+DynamoDB is used to store the key-value pairs of <block id; binary content>, <file id; user id, file path, file sequence, metadata>, <user id; metadata> 
 
 The front end is planned to be written in Qt (or Flutter), so that it can be used on mobile devices.
 
