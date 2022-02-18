@@ -1,4 +1,6 @@
 '''
+Cloud Computing Project Client
+
 EC2 ImageIds:
 
 X ami-09397c199cf1dfdab: Ubuntu w/ Flask X
@@ -13,6 +15,7 @@ from time import sleep
 
 ##############################################################################
 
+#   The RSA key is already stored on the client beforehand
 key = paramiko.RSAKey.from_private_key_file(expanduser('~/Downloads/bruh.pem'))
 client = paramiko.SSHClient()
 client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
@@ -21,7 +24,7 @@ def connect(publicIp, instanceNumber, retries=5, master_ip=None):
     try:
         client.connect(hostname=publicIp, username="ubuntu", pkey=key, timeout=120)
 
-        # Execute a command(cmd) after connecting/ssh to an instance
+        #   Execute a command(cmd) after connecting/ssh to an instance
         if master_ip is None:
             stdin, stdout, stderr = client.exec_command('echo ThisIsTheMaster')
         else:
@@ -32,7 +35,17 @@ def connect(publicIp, instanceNumber, retries=5, master_ip=None):
         print(stdout.read())
         print('------------------------------------------------------------')
 
-        # close the client connection once the job is done
+
+
+        # TODO: DynamoDB
+
+
+
+
+
+
+
+        #   Close the client connection once the job is done
         client.close()
     except Exception as e:
         print(f'{e}; Retrying...')
@@ -55,6 +68,7 @@ m = ec2.create_instances(ImageId='ami-032ac9ac998363686',
     MaxCount=1,
     KeyName=KEY_PAIR, 
     MinCount=1)
+#print(dir(m[0]))
 m[0].wait_until_running()
 m[0].reload()
 print(f'SSH into Master @{m[0].public_ip_address}...')
@@ -76,3 +90,12 @@ for instance in range(len(w)):
     print(f'SSH into Worker {instance} @{w[instance].public_ip_address}...')
 
     connect(w[instance].public_ip_address, instance+1, master_ip=m[0].public_ip_address)
+
+##############################################################################
+
+#   Work is done
+m[0].terminate()
+for i in w:
+    i.terminate()
+m[0].wait_until_terminated()
+i.wait_until_terminated()
