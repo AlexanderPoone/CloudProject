@@ -1,3 +1,42 @@
+[project_pipeline1.png]
+
+GPU instance Visio
+Google Colaboratory (Colab) lacks integration with anything other than Google Drive and Google Cloud platform, hard limit on hard disk, GPU VRAM and RAM. Storage is not always on SSD.
+
+discovery.ucl.ac.uk
+Classification of big point cloud data using cloud computing
+Kun Liu, Jan Boehm
+ISPRS-International Archives of the Photogrammetry, Remote Sensing and Spatial Information Sciences 40, 553-557, 2015
+Point cloud data plays an significant role in various geospatial applications as it conveys plentiful information which can be used for different types of analysis. Semantic analysis, which is an important one of them, aims to label points as different categories. In machine learning, the problem is called classification. In addition, processing point data is becoming more and more challenging due to the growing data volume. In this paper, we address point data classification in a big data context. The popular cluster computing framework Apache Spark is used through the experiments and the promising results suggests a great potential of Apache Spark for large-scale point data processing.
+
+-------------------------------------------------------------
+
+==IoT Example==
+Nadir cameras (RGB or LiDAR) like the image below [Fairbanks_Circle.png]. Smart City lampposts. Scale out G5 GPU EC2 instances. Stream of images. May need ZeroMQ or MQTT installed in the master node to ensure the fairness of each camera...
+
+[project_pipeline2.png]
+
+-------------------------------------------------------------
+
+We recommend a GPU instance for most deep learning purposes. Training new models is faster on a GPU instance than a CPU instance. You can scale sub-linearly when you have multi-GPU instances or if you use distributed training across many instances with GPUs. To set up distributed training, see Distributed Training.
+
+The following instance types support the DLAMI. For information about GPU instance type options and their uses, see EC2 Instance Types and select Accelerated Computing.
+
+Note
+The size of your model should be a factor in selecting an instance. If your model exceeds an instance's available RAM, select a different instance type with enough memory for your application.
+
+Amazon EC2 P3 Instances have up to 8 NVIDIA Tesla V100 GPUs.
+
+Amazon EC2 P4 Instances have up to 8 NVIDIA Tesla A100 GPUs.
+
+Amazon EC2 G3 Instances have up to 4 NVIDIA Tesla M60 GPUs.
+
+Amazon EC2 G4 Instances have up to 4 NVIDIA T4 GPUs.
+
+Amazon EC2 G5 Instances have up to 8 NVIDIA A10G GPUs.
+
+Amazon EC2 G5g Instances have Arm-based AWS Graviton2 processors.
+
 ==Computer graphics processing pipeline in the cloud using EC2 and Apache Airflow==
 
 embarassingly parallel
