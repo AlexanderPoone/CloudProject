@@ -8,7 +8,7 @@ We are writing a lightweight cloud storage deduplication program. Issues scalabi
 
 DynamoDB is used to store the key-value pairs of <block id; binary content>, <file id; user id, file path, file sequence, metadata>, <user id; metadata> 
 
-The front end is planned to be written in Qt (or Flutter), so that it can be used on mobile devices.
+The front end is planned to be written in Flutter, so that it can be used on mobile devices.
 
 The master EC2 node will hold the Flask REST endpoints.
 
