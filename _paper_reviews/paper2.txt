@@ -1,0 +1,21 @@
+
+
+ 
+CQL for Cassandra Vs. PartialQL for DynamoDB
+
+As the name of PartialQL implies, it is 'partial' SQL, many feature from a 'full-fledged' SQL language is absent. Both does not support relational joins, because the databases are NoSQL key-value stores after all.
+
+
+
+DynamoDB
+In Amazon DynamoDB, you can use either the DynamoDB API, or PartiQL, a SQL-compatible query language, to query an item from a table.
+
+PartiQL for DynamoDB
+With PartiQL, you can perform a query by using the ExecuteStatement action and the Select statement on the partition key.
+
+SELECT AlbumTitle, Year, Price
+FROM Music
+WHERE Artist='No One You Know' 
+Using the SELECT statement in this way returns all the songs associated with this particular Artist.
+
+For code examples using Select and ExecuteStatement, see PartiQL Select Statements for DynamoDB.
