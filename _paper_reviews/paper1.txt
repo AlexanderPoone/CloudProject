@@ -1,3 +1,5 @@
+==Review of Classification of big point cloud data using cloud computing (Liu 2015)==
+
 [project_pipeline1.png]
 
 GPU instance Visio
@@ -44,7 +46,6 @@ embarassingly parallel
 Compare to Amazon Lambda, a serverless service offered by AWS. It is very hard if not possible to execute external programs. EC2 is easier to do this. 3 sample programs lastiles.exe, lasground.exe, and lasmerge.exe
 and do benchmark using Python time.time(), compare to lasground on a single instance.
 
-
 WebSocket for communication
 
 ==Preamble==
@@ -54,7 +55,6 @@ Apache Airflow is a local program. Its use is to orchestrate the EC2 instances. 
 lasground as an example
 
 Computer graphics include bitmap images, vector images, 3D meshes, and 3D point clouds.
-
 
 ==Rationale for Using the Cloud==
 Besides cloud storage, cloud computing is particularly useful for deep learning. Procedures in the pipeline, including smoothing, baking and rendering, are resource-hungry and time-consuming process.
@@ -88,7 +88,7 @@ In fact, the open data Point Cloud from CEDD for the entire Hong Kong is 100TB l
 Sort the point cloud by coordinates so that it can be split into tiles. It can be parallelized using merge sort for MapReduce in Hadoop or Spark.
 
 Tile and distribute to all
-Each node classify
+Each node perform classfications
 merge results (can be recursive!)
 
 Ubuntu Visio!!!
