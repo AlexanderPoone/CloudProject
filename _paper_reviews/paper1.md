@@ -36,18 +36,12 @@ The AWS Deep Learning AMI (DLAMI) comes preconfigured with NVIDIA CUDA and NVIDI
 
 #### Computer graphics processing pipeline in the cloud using EC2 and Apache Airflow
 
-Adding a CCTV is embarassingly parallel.
-
-Compare to Amazon Lambda, a serverless service offered by AWS. It is very hard if not possible to execute external programs. EC2 is easier to do this. 3 sample programs lastiles.exe, lasground.exe, and lasmerge.exe
-and do benchmark using Python time.time(), compare to lasground on a single instance.
-
-WebSocket for communication
 
 #### Preamble
 We can programmatically create EC2 instances using the Boto3 library. Commands can be issued programmatically using the paramiko library, which is basically a SSH (Secure Shell) wrapper.
 Apache Airflow is a local program. Its use is to orchestrate the EC2 instances. Specifically, we define an Airflow task as some SSH commands to the EC2 instances. Those Airflow tasks are linked together by a direct acyclic graph (DAG).
 
-lasground as an example
+WebSocket for communication
 
 Computer graphics include bitmap images, vector images, 3D meshes, and 3D point clouds.
 
@@ -73,6 +67,8 @@ Ubuntu Visio!!!
 This is a stream
 Easy to scale, deploy more instances
 
+Adding a CCTV is embarassingly parallel.
+
 As the number of CCTVs increases, the number of repeated pixel sequence sharply increases. We can use run-length encoding and LZ77.
 
 -----------
@@ -87,6 +83,9 @@ Each node perform classfications
 merge results (can be recursive!)
 
 Ubuntu Visio!!!
+
+Compare to Amazon Lambda, a serverless service offered by AWS. It is very hard if not possible to execute external programs. EC2 is easier to do this. 3 sample programs lastiles.exe, lasground.exe, and lasmerge.exe
+and do benchmark using Python time.time(), compare to lasground on a single instance.
 
 #### Master/worker Model
 
