@@ -29,8 +29,11 @@ Elasticity in Cloud Computing. Deduplicate when the user's storage is nearly ful
 ### b. Distributed Data Deduplication
 
 ## 1. Algorithms
-a. Rabin fingerprinting
-b. AES
+* a. Rabin fingerprinting
+The basic idea is that the filesystem computes the cryptographic hash of each block in a file. To save on transfers between the client and server, they compare their checksums and only transfer blocks whose checksums differ. But one problem with this scheme is that a single insertion at the beginning of the file will cause every checksum to change if fixed-sized (e.g. 4 KB) blocks are used. So the idea is to select blocks not based on a specific offset but rather by some property of the block contents. LBFS does this by sliding a 48 byte window over the file and computing the Rabin fingerprint of each window. When the low 13 bits of the fingerprint are zero LBFS calls those 48 bytes a breakpoint and ends the current block and begins a new one. Since the output of Rabin fingerprints are pseudo-random the probability of any given 48 bytes being a breakpoint is {\displaystyle 2^{-13}}2^{{-13}} (1 in 8192). This has the effect of shift-resistant variable size blocks. Any hash function could be used to divide a long file into blocks (as long as a cryptographic hash function is then used to find the checksum of each block): but the Rabin fingerprint is an efficient rolling hash, since the computation of the Rabin fingerprint of region B can reuse some of the computation of the Rabin fingerprint of region A when regions A and B overlap.
+
+Note that this is a problem similar to that faced by rsync.
+* b. AES
 
 ## 2. Case Studies
 * Dropbox Security Breach due to loophole in Deduplication algorithm:
