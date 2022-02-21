@@ -14,6 +14,10 @@ The master EC2 node will hold the Flask REST endpoints.
 
 Amazon EC2 instances are created on demand using the Boto3 library, depending on the input data size.
 
+## Test cases
+
+Some large files (~ 10 GB) will be prepared.
+
 ## 0. Ideas
 Deduplication is a trade-off between user's storage size and file reassembly time.
 Points to consider:
