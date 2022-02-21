@@ -1,7 +1,5 @@
 #### Review of *Classification of Big Point Cloud Data Using Cloud Computing (Liu, Boehm 2015)*
 
-![project_pipeline.png](project_pipeline.png)
-
 GPU instance Visio
 
 Google Colaboratory (Colab) lacks integration with anything other than Google Drive and Google Cloud platform, hard limit on hard disk, GPU VRAM and RAM. Storage is not always on SSD.
@@ -63,7 +61,8 @@ Scale up on demand: VRAM is crucial in deep learning, OOM (out-of-memory) error.
 Duplicate EBS:
 
 #### Example 1: Image Detection on CCTV Frames for Traffic Analysis
-Ubuntu Visio!!!
+![project_pipeline2.png](project_pipeline2.png)
+
 This is a stream
 Easy to scale, deploy more instances
 
@@ -74,6 +73,8 @@ As the number of CCTVs increases, the number of repeated pixel sequence sharply 
 -----------
 Divide and conquer is good
 #### Example 2: Point Cloud Classification Server
+![project_pipeline.png](project_pipeline.png)
+
 In fact, the open data Point Cloud from CEDD for the entire Hong Kong is 100TB large. 0.5 km^2 tiles
 
 Sort the point cloud by coordinates so that it can be split into tiles. It can be parallelized using merge sort for MapReduce in Hadoop or Spark.
