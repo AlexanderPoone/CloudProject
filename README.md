@@ -4,7 +4,7 @@
 <!--## Group members-->
 
 ## Objective
-We are writing a lightweight cloud storage deduplication program. Technical issues like scalability, deduplication granularity, the usefulness of deduplication, and security will be addressed.
+We are writing a lightweight cloud storage deduplication program. *Research problems* like scalability, deduplication granularity, the usefulness of deduplication, and security will be addressed.
 
 DynamoDB is used to store the key-value pairs of `<block id; binary content>`, `<file id; user id, file path, file sequence, metadata>`, `<user id; hash, salt, first name, last name>`
 
