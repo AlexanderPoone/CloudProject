@@ -35,9 +35,9 @@ b. AES
 ## 2. Case Studies
 * Dropbox Security Breach due to loophole in Deduplication algorithm:
 
-* [https://github.com/driverdan/dropship](https://github.com/driverdan/dropship)
-* [https://blog.fosketts.net/2011/07/11/dropbox-data-format-deduplication/](https://blog.fosketts.net/2011/07/11/dropbox-data-format-deduplication/)
-* [https://news.ycombinator.com/item?id=2478567](https://news.ycombinator.com/item?id=2478567)
+  - [https://github.com/driverdan/dropship](https://github.com/driverdan/dropship)
+  - [https://blog.fosketts.net/2011/07/11/dropbox-data-format-deduplication/](https://blog.fosketts.net/2011/07/11/dropbox-data-format-deduplication/)
+  - [https://news.ycombinator.com/item?id=2478567](https://news.ycombinator.com/item?id=2478567)
 The algorithm must be designed with special care to avoid birthday attacks:
 https://en.wikipedia.org/wiki/Birthday_attack
 
