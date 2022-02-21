@@ -61,7 +61,7 @@ Scale up on demand: VRAM is crucial in deep learning, OOM (out-of-memory) error.
 Duplicate EBS:
 
 #### Example 1: Image Detection on CCTV Frames for Traffic Analysis
-![project_pipeline2.png](project_pipeline2.png)
+![./project_pipeline_1.png](./project_pipeline_1.png)
 
 This is a stream
 Easy to scale, deploy more instances
@@ -73,7 +73,7 @@ As the number of CCTVs increases, the number of repeated pixel sequence sharply 
 -----------
 Divide and conquer is good
 #### Example 2: Point Cloud Classification Server
-![project_pipeline.png](project_pipeline.png)
+![./project_pipeline_2.png](./project_pipeline_2.png)
 
 In fact, the open data Point Cloud from CEDD for the entire Hong Kong is 100TB large. 0.5 km^2 tiles
 
