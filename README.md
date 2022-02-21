@@ -51,4 +51,4 @@ https://en.wikipedia.org/wiki/Birthday_attack
 
 <!-- Grid computing: needs to stop other instances once the solution is found. -->
 
-![project_pipeline.png](_paper_reviews/project_pipeline.png)
+![project_pipeline.png](project_pipeline.png)
