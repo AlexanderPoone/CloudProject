@@ -4,6 +4,9 @@
 
 Critical review
 
+https://jimdowney.net/2012/03/05/be-careful-with-sloppy-quorums/
+Both Cassandra and DynamoDB uses hinted handoff.
+
 | Problem | Technique | Advantage |
 |---------|-----------|-----------|
 | Dataset partitioning || Consistent hashing || Incremental, possibly linear scalability in proportion to the number of collaborating nodes.
