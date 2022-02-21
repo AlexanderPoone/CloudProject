@@ -3,12 +3,17 @@
 ![project_pipeline.png](project_pipeline.png)
 
 GPU instance Visio
+
 Google Colaboratory (Colab) lacks integration with anything other than Google Drive and Google Cloud platform, hard limit on hard disk, GPU VRAM and RAM. Storage is not always on SSD.
 
 discovery.ucl.ac.uk
-Classification of big point cloud data using cloud computing
+
+[Classification of big point cloud data using cloud computing](https://discovery.ucl.ac.uk/id/eprint/1471584/1/isprsarchives-XL-3-W3-553-2015.pdf)
+
 Kun Liu, Jan Boehm
+
 ISPRS-International Archives of the Photogrammetry, Remote Sensing and Spatial Information Sciences 40, 553-557, 2015
+
 Point cloud data plays an significant role in various geospatial applications as it conveys plentiful information which can be used for different types of analysis. Semantic analysis, which is an important one of them, aims to label points as different categories. In machine learning, the problem is called classification. In addition, processing point data is becoming more and more challenging due to the growing data volume. In this paper, we address point data classification in a big data context. The popular cluster computing framework Apache Spark is used through the experiments and the promising results suggests a great potential of Apache Spark for large-scale point data processing.
 
 -------------------------------------------------------------
