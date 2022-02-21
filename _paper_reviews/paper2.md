@@ -4,13 +4,18 @@ Haystack...
 
 Data without a schema is useless. You get a document from MongoDB, what do you do with it? Read some fields? You need to know the names, types and meanings of those fields. That’s a schema.
 When people say that MongoDB “has no schema”, they really mean that it does not enforce schema the way SQL databases do. MongoDB pushes schema concerns up to your application level, where you can handle them more flexibly. For example, in order to add a new field to your documents, you don’t need to do an all-or-nothing ALTER on your collection—potentially millions of entries. You just add that field to your ODM (Mongoose) schema and you’re done.
+
 ----
+
 Not entirely true. There are realtime apps that can rely on fields created on the fly. Adding a field to Mongoose model means a new deploy process. There are ODMs that doesn't require a fixed schema definition, Mongorito for instance.
+
 ----
+
 If get the whole data in spark frequently or update frequently, Cassandra will be dead.
 So many limitations on CQL.
 If you are using python, the only one choice of driver is DataStax one. You cannot set the host ports of Cassandra servers if you use the ORM model.
 Now, I'm moving the dataset to mongoDB. I think they are much useful than Cassandra. At least, I can search one single item fast.
+
 ----
 
 #### A Comprehensive Comparative Analysis of NoSQL Engines
@@ -39,7 +44,9 @@ Partition key
 The partition key is part of the table's primary key. It is a hash value that is used to retrieve items from your table and allocate data across hosts for scalability and availability.
 Sort key - optional
 You can use a sort key as the second part of a table's primary key. The sort key allows you to sort or search among all items sharing the same partition key.
+
 ----
+
 In Amazon DynamoDB, you can use either the DynamoDB API, or PartiQL, a SQL-compatible query language, to query an item from a table.
 With PartiQL, you can perform a query by using the ExecuteStatement action and the Select statement on the partition key.
 
