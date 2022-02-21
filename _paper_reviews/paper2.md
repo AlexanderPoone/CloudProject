@@ -7,6 +7,8 @@ Critical review
 https://jimdowney.net/2012/03/05/be-careful-with-sloppy-quorums/
 Both Cassandra and DynamoDB uses hinted handoff.
 
+A page in the Riak wiki states that “R + W > N ensures strong consistency in a cluster” and includes a reference to the post by Vogels on eventual consistency. However, a recent Basho posting states that Riak uses sloppy quorums by default, though it uses strict quorums whenever the values of PR and PW are used rather than R and W. Overall, I didn’t find the Riak documentation clear on this important distinction.
+
 | Problem | Technique | Advantage |
 |---------|-----------|-----------|
 | Dataset partitioning || Consistent hashing || Incremental, possibly linear scalability in proportion to the number of collaborating nodes.
