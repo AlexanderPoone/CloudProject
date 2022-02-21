@@ -10,9 +10,7 @@ DynamoDB is used to store the key-value pairs of `<block id; binary content>`, `
 
 The front end is planned to be written in Flutter, so that it can be used on mobile devices. The back end is an API powered by Flask.
 
-TCP socket programming is used as the means of communication between EC2 Nodes.
-
-Amazon EC2 instances are created on demand using the Boto3 library, depending on the input data size.
+Amazon EC2 instances are created on demand using the Boto3 library, depending on the input data size. TCP socket programming is used as the means of communication between EC2 Nodes.
 
 ## Test cases
 
