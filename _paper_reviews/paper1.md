@@ -83,7 +83,7 @@ merge results (can be recursive!)
 
 Ubuntu Visio!!!
 
-Master/worker Model
+#### Master/worker Model
 
 Duplicate EBS that contains scripts and software like Blender, CompareCloud, Maya and MeshLab. We can manipulate the abovementioned software using their scripting capabilities. We do not need graphical interface to use these software, since it supports languages like MEL and Python.
 
