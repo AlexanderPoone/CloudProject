@@ -13,42 +13,32 @@ Point cloud data plays an significant role in various geospatial applications as
 
 -------------------------------------------------------------
 
-==IoT Example==
+#### IoT Example
 Nadir cameras (RGB or LiDAR) like the image below [Fairbanks_Circle.png]. Smart City lampposts. Scale out G5 GPU EC2 instances. Stream of images. May need ZeroMQ or MQTT installed in the master node to ensure the fairness of each camera...
 
 [project_pipeline2.png]
 
 -------------------------------------------------------------
+Training new models is faster on a GPU instance than a CPU instance. You can scale sub-linearly when you have multi-GPU instances or if you use distributed training across many instances with GPUs.
 
-We recommend a GPU instance for most deep learning purposes. Training new models is faster on a GPU instance than a CPU instance. You can scale sub-linearly when you have multi-GPU instances or if you use distributed training across many instances with GPUs. To set up distributed training, see Distributed Training.
+The AWS Deep Learning AMI (DLAMI) comes preconfigured with NVIDIA CUDA and NVIDIA cuDNN, as well as the latest releases of the most popular deep learning frameworks.
+* Amazon EC2 P3 Instances have up to 8 NVIDIA Tesla V100 GPUs.
+* Amazon EC2 P4 Instances have up to 8 NVIDIA Tesla A100 GPUs.
+* Amazon EC2 G3 Instances have up to 4 NVIDIA Tesla M60 GPUs.
+* Amazon EC2 G4 Instances have up to 4 NVIDIA T4 GPUs.
+* Amazon EC2 G5 Instances have up to 8 NVIDIA A10G GPUs.
+* Amazon EC2 G5g Instances have Arm-based AWS Graviton2 processors.
 
-The following instance types support the DLAMI. For information about GPU instance type options and their uses, see EC2 Instance Types and select Accelerated Computing.
+#### Computer graphics processing pipeline in the cloud using EC2 and Apache Airflow
 
-Note
-The size of your model should be a factor in selecting an instance. If your model exceeds an instance's available RAM, select a different instance type with enough memory for your application.
-
-Amazon EC2 P3 Instances have up to 8 NVIDIA Tesla V100 GPUs.
-
-Amazon EC2 P4 Instances have up to 8 NVIDIA Tesla A100 GPUs.
-
-Amazon EC2 G3 Instances have up to 4 NVIDIA Tesla M60 GPUs.
-
-Amazon EC2 G4 Instances have up to 4 NVIDIA T4 GPUs.
-
-Amazon EC2 G5 Instances have up to 8 NVIDIA A10G GPUs.
-
-Amazon EC2 G5g Instances have Arm-based AWS Graviton2 processors.
-
-==Computer graphics processing pipeline in the cloud using EC2 and Apache Airflow==
-
-embarassingly parallel
+Adding a CCTV is embarassingly parallel.
 
 Compare to Amazon Lambda, a serverless service offered by AWS. It is very hard if not possible to execute external programs. EC2 is easier to do this. 3 sample programs lastiles.exe, lasground.exe, and lasmerge.exe
 and do benchmark using Python time.time(), compare to lasground on a single instance.
 
 WebSocket for communication
 
-==Preamble==
+#### Preamble
 We can programmatically create EC2 instances using the Boto3 library. Commands can be issued programmatically using the paramiko library, which is basically a SSH (Secure Shell) wrapper.
 Apache Airflow is a local program. Its use is to orchestrate the EC2 instances. Specifically, we define an Airflow task as some SSH commands to the EC2 instances. Those Airflow tasks are linked together by a direct acyclic graph (DAG).
 
@@ -56,7 +46,7 @@ lasground as an example
 
 Computer graphics include bitmap images, vector images, 3D meshes, and 3D point clouds.
 
-==Rationale for Using the Cloud==
+#### Rationale for Using Cloud Computing
 Besides cloud storage, cloud computing is particularly useful for deep learning. Procedures in the pipeline, including smoothing, baking and rendering, are resource-hungry and time-consuming process.
 
 Many reasons: 
@@ -73,7 +63,7 @@ Scale up on demand: VRAM is crucial in deep learning, OOM (out-of-memory) error.
 
 Duplicate EBS:
 
-==Example 1: Image Detection on CCTV Frames for Traffic Analysis==
+#### Example 1: Image Detection on CCTV Frames for Traffic Analysis
 Ubuntu Visio!!!
 This is a stream
 Easy to scale, deploy more instances
@@ -82,7 +72,7 @@ As the number of CCTVs increases, the number of repeated pixel sequence sharply 
 
 -----------
 Divide and conquer is good
-==Example 2: Point Cloud Classification Server==
+#### Example 2: Point Cloud Classification Server
 In fact, the open data Point Cloud from CEDD for the entire Hong Kong is 100TB large. 0.5 km^2 tiles
 
 Sort the point cloud by coordinates so that it can be split into tiles. It can be parallelized using merge sort for MapReduce in Hadoop or Spark.
