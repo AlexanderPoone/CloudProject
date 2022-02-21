@@ -31,22 +31,32 @@ def login():
 	record = tableUsers.get_item(Key={'userid': request.form['username']})
 	print(record)
 	if 'Item' in record:
-		print(record['Item'])
-
-		print(record['Item']['hash'] == request.form['hash'])
-		sessionid = 'blahblahblah'
+		if record['Item']['hash'].value == sha512(bytes(request.form['hash'], encoding='utf-8') + record['Item']['salt'].value).digest():
+			sessionid = 'blahblahblah'
+			print('=== Success ===')
+		else:
+			sessionid = False
 	else:
 		sessionid = False
 	return {'sessionid': sessionid}
 
 @app.route('/register', methods = ['POST'])
 def register():
-	
-	str(sha512(bytes(salt)).hexdigest())
-	sha512(bytes(salt)).hexdigest()
-	salt = urandom(16)
-	tableUsers.put_item(Item={'userid': request.form['username'], 'salt': salt, 'hash': request.form['hash']})
-	return True
+	record = tableUsers.get_item(Key={'userid': request.form['username']})
+	print(record)
+	if 'Item' in record:
+		return 'taken'
+	else:
+		salt = urandom(16)
+		print(salt)
+
+		hash = sha512(bytes(request.form['hash'], encoding='utf-8') + salt).digest()
+		print({'userid': request.form['username'], 'salt': salt, 'hash': hash})
+
+		tableUsers.put_item(Item={'userid': request.form['username'], 'salt': salt, 'hash': hash})
+		
+		sessionid = 'blahblahblah'
+		return {'sessionid': sessionid}
 
 @app.route('/getFileList', methods = ['POST'])
 def getFileList():

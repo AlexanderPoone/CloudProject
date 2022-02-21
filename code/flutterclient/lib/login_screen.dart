@@ -7,7 +7,6 @@ import 'package:flutter_signin_button/button_list.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:http/http.dart' as http;
 import 'package:crypto/crypto.dart';
-import 'dart:convert';
 
 import 'constants.dart';
 import 'custom_route.dart';
@@ -45,8 +44,8 @@ class LoginScreen extends StatelessWidget {
   }
 
   Future<String?> _signupUser(SignupData data) {
-    return Future.delayed(loginTime).then((_) {
-      var bytes = utf8.encode(data.hashCode); // data being hashed
+    return Future.delayed(loginTime).then((_) async {
+      var bytes = utf8.encode(data.password!); // data being hashed
       var digest = sha1.convert(bytes);
 
       try {
@@ -68,11 +67,11 @@ class LoginScreen extends StatelessWidget {
     });
   }
 
-  Future<String?> _signupConfirm(String error, LoginData data) {
-    return Future.delayed(loginTime).then((_) {
-      return null;
-    });
-  }
+  // Future<String?> _signupConfirm(String error, LoginData data) {
+  //   return Future.delayed(loginTime).then((_) {
+  //     return null;
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -82,8 +81,8 @@ class LoginScreen extends StatelessWidget {
       // logoTag: Constants.logoTag,
       titleTag: Constants.titleTag,
       navigateBackAfterRecovery: true,
-      onConfirmRecover: _signupConfirm,
-      onConfirmSignup: _signupConfirm,
+      // onConfirmRecover: _signupConfirm,
+      // onConfirmSignup: _signupConfirm,
       loginAfterSignUp: false,
       loginProviders: [],
       termsOfService: [],
@@ -254,7 +253,7 @@ class LoginScreen extends StatelessWidget {
         return _recoverPassword(name);
         // Show new password dialog
       },
-      showDebugButtons: true,
+      // showDebugButtons: true,
     );
   }
 }
