@@ -1,6 +1,6 @@
-==Review of Classification of big point cloud data using cloud computing (Liu 2015)==
+#### Review of *Classification of Big Point Cloud Data Using Cloud Computing (Liu, Boehm 2015)*
 
-[project_pipeline1.png]
+![project_pipeline1.png]()
 
 GPU instance Visio
 Google Colaboratory (Colab) lacks integration with anything other than Google Drive and Google Cloud platform, hard limit on hard disk, GPU VRAM and RAM. Storage is not always on SSD.
