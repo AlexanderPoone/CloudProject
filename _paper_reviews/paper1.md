@@ -19,7 +19,7 @@ Point cloud data plays an significant role in various geospatial applications as
 #### IoT Example
 Nadir cameras (RGB or LiDAR) like the image below [Fairbanks_Circle.png]. Smart City lampposts. Scale out G5 GPU EC2 instances. Stream of images. May need ZeroMQ or MQTT installed in the master node to ensure the fairness of each camera...
 
-[project_pipeline2.png]
+![Fairmount Circle, Shaker Heights.jpg](Fairmount Circle, Shaker Heights.jpg)
 
 -------------------------------------------------------------
 Training new models is faster on a GPU instance than a CPU instance. You can scale sub-linearly when you have multi-GPU instances or if you use distributed training across many instances with GPUs.
