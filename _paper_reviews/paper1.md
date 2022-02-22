@@ -20,6 +20,9 @@ Augmentation?
 
 Spark error handling...
 
+Timeliness is a critical factor for many use cases of CG processing.
+To address possible scalability issues in that work, two alternative architectures for CG processing using Amazon EC2 instances are presented. Simple benchmarking has been done to test the efficiency of these cloud architectures.
+
 -------------------------------------------------------------
 
 #### IoT Example
