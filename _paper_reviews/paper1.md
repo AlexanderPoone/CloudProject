@@ -14,9 +14,7 @@ ISPRS-International Archives of the Photogrammetry, Remote Sensing and Spatial I
 
 Machine learning like processing computer graphics (CG) data is becoming more and more challenging due to the growing data volume. In this paper, we address point data classification in a big data context. The popular cluster computing framework Apache Spark is used through the experiments and the promising results suggests a great potential of Apache Spark for large-scale point data processing.
 
-Granularity: use nanoservices
-
-Augmentation?
+The architecture lacks granularity: a modern cloud application is usually laid out as a network of micro(/nano)services. For example, data augmentation can be one microservice in the pipeline.
 
 Spark error handling...
 
