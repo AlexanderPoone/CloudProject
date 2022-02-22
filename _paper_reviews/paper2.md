@@ -22,7 +22,7 @@ When people say that MongoDB “has no schema”, they really mean that it does 
 
 ----
 
-Not entirely true. There are realtime apps that can rely on fields created on the fly. Adding a field to Mongoose model means a new deploy process. There are ODMs that doesn't require a fixed schema definition, Mongorito for instance.
+Not entirely true. There are real-time apps that can rely on fields created on the fly. Adding a field to Mongoose model means a new deploy process. There are ODMs that doesn't require a fixed schema definition, Mongorito for instance.
 
 ----
 
@@ -42,7 +42,7 @@ https://stackoverflow.com/questions/13107976/why-does-mongoose-use-schema-when-m
 * Redis
 
 #### Cassandra
-Cassandra was modelled upon DynamoDB - they are mostly the same. DynamoDB and Cassandra both belong to key-value stores, a category of NoSQL databases. They are both (A,P) databases in CAP theory parlance - both of them have only eventual (or weak) consistency, as they sacrifies C to achieve higher A (availability). They both use the Gossip protocol for membership protocol and failure detection. They both use consistent hashing ring of nodes for  distributed hash table (DHT), which has some nuances of optimisation. NoSQL does not mean the absence of a SQL query language, it is actually the abbreviation of NoSQL. For ease of basic CRUD (create, read, update, and write) operations, the developers of both DynamoDB and Cassandra developped some variants of SQL lanuages.
+Cassandra was modelled on DynamoDB - they are mostly the same. DynamoDB and Cassandra both belong to key-value stores, a category of NoSQL databases. They are both (A,P) databases in CAP theory parlance - both of them have only eventual (or weak) consistency, as they sacrifice C to achieve higher A (availability). They both use the Gossip protocol for membership protocol and failure detection. They both use consistent hashing ring of nodes for distributed hash table (DHT), which has some nuances of optimisation. NoSQL does not mean the absence of a SQL query language; it is actually the abbreviation of NoSQL. For ease of basic CRUD (create, read, update, and write) operations, the developers of both DynamoDB and Cassandra developed some variants of SQL languages.
 
 Cassandra is a wide-column store like Goggle BigTable. DynamoDB is multi-model. Cassandra has write optimisation, DynamoDB is more suitable for large reads.
 
