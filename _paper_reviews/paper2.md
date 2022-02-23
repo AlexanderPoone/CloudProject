@@ -40,6 +40,9 @@ The claims by MongoDB that it fulfils all of the four ACID properties: atomicity
 
 Mongoose is making MongoDB to behave more like RDBMS. Is it a violation of the NoSQL paradigm. How large is the overhead.
 
+Not entirely true. There are real-time apps that can rely on fields created on the fly. Adding a field to Mongoose model means a new deploy process. There are ODMs that doesn't require a fixed schema definition, Mongorito for instance.
+Ever heard of custom fields? Say you want your clients to be able to define their own schema, something you'll want to store in its own collection without having to have a developer change code for every customer. This is a perfect use-case for schemaless design.
+
 I would advice that if you are new to any sort of application, you try to use the lowest level APIs first. This makes you familiar with the product and you learn how to work with it. You get to know its strengths, you will learn how to use it in the most optimal way, and you get to know its weaknesses. You will never learn those things if you start hiding behind an ORM from the start on.
 
 If you then get to know the system (in this case) MongoDB well enough, then you could consider using an ODM—we tend to call it an ODM, as the R stands for "Relational", whereas the "D" stands for "Document". But as you say, for dealing with MongoDB, or any NoSQL databases, having an ODM doesn't always make a whole lot of sense but it could improve developer productivity. But to start, I would avoid an ORM/ODM.
@@ -69,10 +72,6 @@ I couldn't agree more. Also, the term ORM stands for object-relational-mapper wh
 ----
 Data without a schema is useless. You get a document from MongoDB, what do you do with it? Read some fields? You need to know the names, types and meanings of those fields. That's a schema.
 When people say that MongoDB “has no schema”, they really mean that it does not enforce schema the way SQL databases do. MongoDB pushes schema concerns up to your application level, where you can handle them more flexibly. For example, in order to add a new field to your documents, you don't need to do an all-or-nothing ALTER on your collection—potentially millions of entries. You just add that field to your ODM (Mongoose) schema and you're done.
-
-----
-
-Not entirely true. There are real-time apps that can rely on fields created on the fly. Adding a field to Mongoose model means a new deploy process. There are ODMs that doesn't require a fixed schema definition, Mongorito for instance.
 
 ----
 
