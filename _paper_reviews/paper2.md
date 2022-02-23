@@ -8,13 +8,13 @@ https://db-engines.com/en/system/Amazon+DynamoDB%3BRedis
 
 Document-oriented databases are inherently a subclass of the key-value store, another NoSQL database concept. The difference lies in the way the data is processed; in a key-value store, the data is considered to be inherently opaque to the database, whereas a document-oriented system relies on internal structure in the document in order to extract metadata that the database engine uses for further optimization. Although the difference is often negligible due to tools in the systems,[a] conceptually the document-store is designed to offer a richer experience with modern programming techniques.
 
-| Problem | Technique | Advantage |
-|---------|-----------|-----------|
-| Dataset partitioning | Consistent hashing | Incremental, possibly linear scalability in proportion to the number of collaborating nodes.
-| Highly available writes | Vector Clock or Dotted-Version-Vector Sets, reconciliation during reads | Version size is decoupled from update rates.
-| Handling temporary failures | Sloppy Quorums and hinted handoff | Provides high availability and durability guarantee when some of the replicas are not available.
-| Recovering from permanent failures | Anti-entropy using Merkle tree | Can be used to identify differences between replica owners and synchronize divergent replicas pro-actively.
-| Membership and failure detection | Gossip-based membership protocol and failure detection | Avoids having a centralized registry for storing membership and node liveness information, preserving symmetry.
+| Problem | DocumentDB (Mongo) Technique | DynamoDB Technique | Advantage |
+|---------|---------|-----------------|-----------|
+| Dataset partitioning | | Consistent hashing | Incremental, possibly linear scalability in proportion to the number of collaborating nodes.
+| Highly available writes | | Vector Clock or Dotted-Version-Vector Sets, reconciliation during reads | Version size is decoupled from update rates.
+| Handling temporary failures | | Sloppy Quorums and hinted handoff | Provides high availability and durability guarantee when some of the replicas are not available.
+| Recovering from permanent failures | | Anti-entropy using Merkle tree | Can be used to identify differences between replica owners and synchronize divergent replicas pro-actively.
+| Membership and failure detection | | Gossip-based membership protocol and failure detection | Avoids having a centralized registry for storing membership and node liveness information, preserving symmetry.
 
 Both Cassandra and DynamoDB uses 'hinted handoff'. What is 'sloppy quorum', 'hinted handoff' and 'anti-entropy' by the way:
 
