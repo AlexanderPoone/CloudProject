@@ -6,7 +6,7 @@ https://db-engines.com/en/system/Amazon+DynamoDB%3BMongoDB%3BRedis
 
 Amazon Web Services (AWS) offers many types of databases on the cloud - DynamoDB, DocumentDB, MemoryDB, ElasticCache, Aurora, RedShift, among many others. Such diversity may be confusing to non-experts, considering the technologies behind DynamoDB, DocumentDB and MemoryDB - Dynamo, MongoDB and Redis, are essentially NoSQL key-value stores. In fact, their differences are numerous and these databases have divergent use cases.
 
-| Comparison | DocumentDB (Mongo) | DynamoDB |
+| Comparison | DocumentDB (based on Mongo) | DynamoDB |
 |---------|---------|-----------------|
 | Type | NoSQL: Key-value store: document store | NoSQL: Key-value store: wide-column store |
 | Relational Joins | Not supported | Not supported |
@@ -17,7 +17,7 @@ Amazon Web Services (AWS) offers many types of databases on the cloud - DynamoDB
 
 Document-oriented databases are inherently a subclass of the key-value store, another NoSQL database concept. The difference lies in the way the data is processed; in a key-value store, the data is considered to be inherently opaque to the database, whereas a document-oriented system relies on internal structure in the document in order to extract metadata that the database engine uses for further optimization. Although the difference is often negligible due to tools in the systems,[a] conceptually the document-store is designed to offer a richer experience with modern programming techniques.
 
-| Problem | DocumentDB (Mongo) Technique | DynamoDB Technique | Advantage |
+| Problem | DocumentDB (based on Mongo) Technique | DynamoDB Technique | Advantage |
 |---------|---------|-----------------|-----------|
 | Dataset partitioning | | Consistent hashing | Incremental, possibly linear scalability in proportion to the number of collaborating nodes.
 | Highly available writes | | Vector Clock or Dotted-Version-Vector Sets, reconciliation during reads | Version size is decoupled from update rates.
