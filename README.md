@@ -42,6 +42,9 @@ The basic idea is that the filesystem computes the cryptographic hash of each bl
 Note that this is a problem similar to that faced by rsync.
 
 ## 2. Case Studies
+
+Excellent paper: [https://www.ida.liu.se/~TDDD17/oldprojects/2014/Covert%20channels%20in%20the%20cloud/TDDD17_Project_report_marei265_carer706.pdf](https://www.ida.liu.se/~TDDD17/oldprojects/2014/Covert%20channels%20in%20the%20cloud/TDDD17_Project_report_marei265_carer706.pdf)
+
 * Dropbox Security Breach due to loophole in Deduplication algorithm:
 
   - [https://github.com/driverdan/dropship](https://github.com/driverdan/dropship)
