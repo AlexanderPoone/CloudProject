@@ -12,7 +12,7 @@ Document-oriented databases are inherently a subclass of the key-value store, an
 |---------|---------|-----------------|
 | Type | NoSQL: Key-value store: document store | NoSQL: Key-value store: wide-column store |
 | Relational Joins | Not supported | Not supported |
-| SQL Support | None | Only partial: PartiQL |
+| SQL Support | None | Only partial support: PartiQL |
 | ACID-compliant | Lacks Isolation | Weak (eventual) Consistency |
 | CAP theory | Focus on CA | Focus on AP |
 | PACELC theory (else if no failure) | PC/EC | PA/EL |
