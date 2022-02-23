@@ -8,6 +8,13 @@ https://db-engines.com/en/system/Amazon+DynamoDB%3BRedis
 
 Document-oriented databases are inherently a subclass of the key-value store, another NoSQL database concept. The difference lies in the way the data is processed; in a key-value store, the data is considered to be inherently opaque to the database, whereas a document-oriented system relies on internal structure in the document in order to extract metadata that the database engine uses for further optimization. Although the difference is often negligible due to tools in the systems,[a] conceptually the document-store is designed to offer a richer experience with modern programming techniques.
 
+| Comparison | DocumentDB (Mongo) | DynamoDB |
+|---------|---------|-----------------|
+| Type | NoSQL: Key-value store: document store | NoSQL: Key-value store: wide-column store |
+| Relational Joins | Not supported | Not supported |
+| SQL Support | None | Only partial: PartiQL |
+
+
 | Problem | DocumentDB (Mongo) Technique | DynamoDB Technique | Advantage |
 |---------|---------|-----------------|-----------|
 | Dataset partitioning | | Consistent hashing | Incremental, possibly linear scalability in proportion to the number of collaborating nodes.
