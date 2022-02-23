@@ -4,6 +4,21 @@
 
 Critical review
 
+What is sloppy quorum and hinted handoff by the way:
+
+- Sloppy: If you describe someone's work or activities as sloppy, you mean they have been done in a careless and lazy way.
+- Quorum: Refers to Apache ZooKeeper quorum, the minimum number of servers required to run the Zookeeper is called Quorum. ZooKeeper replicates whole data tree to all the quorum servers.
+
+- Hinted: With notice
+- Handoff: the act of warding off an opposing player with the open hand
+
+
+
+
+
+
+
+
 The claims by MongoDB that it fulfils all of the four ACID properties: atomicity, consistency, isolation, and durability is dubious.
 
 
