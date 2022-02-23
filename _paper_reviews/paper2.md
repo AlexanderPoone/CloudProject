@@ -15,7 +15,7 @@ Document-oriented databases are inherently a subclass of the key-value store, an
 | SQL Support | None | Only partial support: PartiQL |
 | ACID-compliant | Lacks Isolation | Weak (eventual) Consistency |
 | CAP theory | Focus on CA | Focus on AP |
-| PACELC theory (else if no failure) | PC/EC | PA/EL |
+| PACELC theory (else if no failure) | PA/EC: In the baseline case, the system guarantees reads and writes to be consistent. | PA/EL: If a partition occurs, they give up consistency for availability, and under normal operation they give up consistency for lower latency. |
 
 
 | Problem | DocumentDB (Mongo) Technique | DynamoDB Technique | Advantage |
