@@ -9,6 +9,7 @@ Amazon Web Services (AWS) offers many types of databases on the cloud - DynamoDB
 
 | Comparison | DocumentDB (based on Mongo) | DynamoDB |
 |---------|---------|-----------------|
+| Structure | Collection of BSON Documents | Tables |
 | Type | NoSQL: Key-value store: document store | NoSQL: Key-value store: wide-column store |
 | Relational Joins | Not supported | Not supported |
 | SQL Support | None | Only partial support: PartiQL |
