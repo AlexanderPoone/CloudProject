@@ -12,10 +12,7 @@ Critical review
 | Recovering from permanent failures | Anti-entropy using Merkle tree | Can be used to identify differences between replica owners and synchronize divergent replicas pro-actively.
 | Membership and failure detection | Gossip-based membership protocol and failure detection | Avoids having a centralized registry for storing membership and node liveness information, preserving symmetry.
 
-Data without a schema is useless. You get a document from MongoDB, what do you do with it? Read some fields? You need to know the names, types and meanings of those fields. That's a schema.
-When people say that MongoDB “has no schema”, they really mean that it does not enforce schema the way SQL databases do. MongoDB pushes schema concerns up to your application level, where you can handle them more flexibly. For example, in order to add a new field to your documents, you don't need to do an all-or-nothing ALTER on your collection—potentially millions of entries. You just add that field to your ODM (Mongoose) schema and you're done.
-
-Both Cassandra and DynamoDB uses hinted handoff. What is sloppy quorum and hinted handoff by the way:
+Both Cassandra and DynamoDB uses 'hinted handoff'. What is 'sloppy quorum', 'hinted handoff' and 'anti-entropy' by the way:
 
 - Sloppy: If you describe someone's work or activities as sloppy, you mean they have been done in a careless and lazy way.
 - Quorum: Refers to Apache ZooKeeper quorum, the minimum number of servers required to run the Zookeeper is called Quorum. ZooKeeper replicates whole data tree to all the quorum servers. (https://jimdowney.net/2012/03/05/be-careful-with-sloppy-quorums/ The rule "R + W > N ensures strong consistency in a cluster" does not hold for sloppy quorums. A page in the Riak wiki states that "R + W > N ensures strong consistency in a cluster" and includes a reference to the post by Vogels on eventual consistency. However, a recent Basho posting states that Riak uses sloppy quorums by default, though it uses strict quorums whenever the values of PR and PW are used rather than R and W. Overall, I didn’t find the Riak documentation clear on this important distinction.)
@@ -24,6 +21,12 @@ Both Cassandra and DynamoDB uses hinted handoff. What is sloppy quorum and hinte
 - Handoff: the act of warding off an opposing player with the open hand
 
 The claims by MongoDB that it fulfils all of the four ACID properties: atomicity, consistency, isolation, and durability is dubious.
+
+
+
+
+Data without a schema is useless. You get a document from MongoDB, what do you do with it? Read some fields? You need to know the names, types and meanings of those fields. That's a schema.
+When people say that MongoDB “has no schema”, they really mean that it does not enforce schema the way SQL databases do. MongoDB pushes schema concerns up to your application level, where you can handle them more flexibly. For example, in order to add a new field to your documents, you don't need to do an all-or-nothing ALTER on your collection—potentially millions of entries. You just add that field to your ODM (Mongoose) schema and you're done.
 
 ----
 
