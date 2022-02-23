@@ -17,7 +17,10 @@ Amazon EC2 instances are created on demand using the Boto3 library, depending on
 Some large files (~ 10 GB) will be prepared.
 
 ## 0. Ideas
+Cloud storage / cloud backup: handling unstructured data
+
 Deduplication is a trade-off between user's storage size and file reassembly time.
+
 Points to consider:
 * What the optimal block size is (a.k.a. granularity)
 * How much latency is needed to reassemble the files
