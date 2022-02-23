@@ -5,6 +5,8 @@ Critical review
 https://db-engines.com/en/system/Amazon+DynamoDB%3BMongoDB%3BRedis
 https://dynobase.com/dynamodb-common-misconceptions/
 
+Google BigTable https://www.google.com/search?q=domain-reversed+URL+bigtable&sxsrf=APq-WBsleuuuePA0n0Y3C5-ali0v_Y2-rQ:1645599856489&source=lnms&tbm=isch&sa=X&ved=2ahUKEwiis42XoZX2AhVuUvUHHdyZCEoQ_AUoAXoECAEQAw&biw=1396&bih=663&dpr=1.38#imgrc=dd3ZdOLPxxWIcM
+
 Amazon Web Services (AWS) offers many types of databases on the cloud - DynamoDB, DocumentDB, MemoryDB, ElasticCache, Aurora, RedShift, among many others. Such diversity may be confusing to non-experts, considering the technologies behind DynamoDB, DocumentDB and MemoryDB - Dynamo, MongoDB and Redis, are essentially NoSQL key-value stores. In fact, their differences are numerous and these databases have divergent use cases.
 
 | Comparison | DocumentDB (based on Mongo) | DynamoDB |
