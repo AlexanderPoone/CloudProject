@@ -8,7 +8,7 @@ We are writing a lightweight cloud storage deduplication program. *Research prob
 
 DynamoDB is used to store the key-value pairs of `<block id; binary content>`, `<file id; user id, file path, file sequence, metadata>`, `<user id; hash, salt, first name, last name>`
 
-The front end is planned to be written in Flutter, so that it can be used on mobile devices. The back end is an API powered by Flask.
+The front end is written in Flutter, so that it can be used on mobile devices. The back end is an API powered by Flask.
 
 Amazon EC2 instances are created on demand using the Boto3 library, depending on the input data size. TCP socket programming is used as the means of communication between EC2 Nodes.
 
