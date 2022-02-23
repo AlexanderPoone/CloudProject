@@ -15,8 +15,8 @@ Amazon Web Services (AWS) offers many types of databases on the cloud - DynamoDB
 | Relational Joins | Not supported | Not supported |
 | SQL Support | None | Only partial support: PartiQL |
 | ACID-compliant | Lacks Isolation | Weak (eventual) Consistency |
-| CAP theory | Focus on CA | Focus on AP |
-| PACELC theory (else if no failure) | PA/EC: In the baseline case, the system guarantees reads and writes to be consistent. | PA/EL: If a partition occurs, they give up consistency for availability, and under normal operation they give up consistency for lower latency. |
+| CAP theory taxonomy | Focus on CA | Focus on AP |
+| PACELC theory taxonomy ('else': what to focus if there is no failure) | PA/EC: In the baseline case, the system guarantees reads and writes to be consistent. | PA/EL: If a partition occurs, they give up consistency for availability, and under normal operation they give up consistency for lower latency. |
 
 Document-oriented databases are inherently a subclass of the key-value store, another NoSQL database concept. The difference lies in the way the data is processed; in a key-value store, the data is considered to be inherently opaque to the database, whereas a document-oriented system relies on internal structure in the document in order to extract metadata that the database engine uses for further optimization. Although the difference is often negligible due to tools in the systems,[a] conceptually the document-store is designed to offer a richer experience with modern programming techniques.
 
