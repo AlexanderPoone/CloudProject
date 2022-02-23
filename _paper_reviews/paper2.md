@@ -1,11 +1,8 @@
-#### Review of Amazon DynamoDB
-
-#### Finding a needle in a haystack
-
+### Review of Amazon DynamoDB
+#### Finding a needle in a haystack: A Comprehensive Comparative Analysis between two AWS database engines: DynamoDB and DocumentDB
 Critical review
 
-https://db-engines.com/en/system/Amazon+DynamoDB%3BRedis
-
+https://db-engines.com/en/system/Amazon+DynamoDB%3BMongoDB%3BRedis
 
 Amazon Web Services (AWS) offers many types of databases on the cloud - DynamoDB, DocumentDB, MemoryDB, ElasticCache, Aurora, RedShift, among many others. Such diversity may be confusing to non-experts, considering the technologies behind DynamoDB, DocumentDB and MemoryDB - Dynamo, MongoDB and Redis, are essentially NoSQL key-value stores. In fact, their differences are numerous and these databases have divergent use cases.
 
@@ -56,8 +53,6 @@ If you are using python, the only one choice of driver is DataStax one. You cann
 Now, I'm moving the dataset to mongoDB. I think they are much useful than Cassandra. At least, I can search one single item fast.
 
 ----
-
-#### A Comprehensive Comparative Analysis of NoSQL Engines
 
 List of NoSQL database engines:
 * Solr/Elastic Search
