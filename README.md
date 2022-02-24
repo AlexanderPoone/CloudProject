@@ -32,7 +32,7 @@ Elasticity in Cloud Computing. Deduplicate when the user's storage is nearly ful
 ## 1. Algorithms
 * a. AES
 
-Block size is fixed to be 128 b. More insecure.
+Block size is fixed to be 128 bit, which makes cloud storage/backup insecure. By observing which blocks are actually uploaded and which blocks are not, the attacker may infer the file structure.
 
 * b. Rabin fingerprinting
 
