@@ -4,8 +4,6 @@ Monolithic is the worst
 
 Multiple masters Visio...
 
-GPU instance Visio
-
 Google Colaboratory (Colab) lacks integration with anything other than Google Drive and Google Cloud platform, hard limit on hard disk, GPU VRAM and RAM. Storage is not always on SSD.
 
 discovery.ucl.ac.uk
