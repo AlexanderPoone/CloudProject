@@ -2,7 +2,8 @@
 
 Todo: Multiple masters Visio...
 
-Traditional monolithic architeture is obsolete. The upper bound for performance gain is lower scaling up than scaling out in the cloud, suffers from high coupling, services may have common sources of failure, and not cost-effective.
+Among web applications architures, the traditional monolithic model is obsolete. The upper bound for performance gain is lower scaling up than scaling out in the cloud, suffers from high coupling, services may have common sources of failure, and not cost-effective.
+
 A network of loosely coupled microservices. There is a tendancy to even break down microservices into nanoservices. For instance, dataset augmentation can be defined as one nanoservice. A prominent example is Amazon Lambda, which is named after lambda functions.
 
 
