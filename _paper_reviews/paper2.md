@@ -2,10 +2,41 @@
 #### Finding a needle in a haystack: A Comprehensive Comparative Analysis between two AWS database engines: DynamoDB and DocumentDB
 Critical review
 
-https://db-engines.com/en/system/Amazon+DynamoDB%3BMongoDB%3BRedis
-https://dynobase.com/dynamodb-common-misconceptions/
+The CAP theorem is outdated as it provides an over-simplified view of today’s distributed systems because under normal operations, availability and consistency are adjustable and can be configured to meet specific requirements. However, in keeping with CAP, increasing one state decreases the other. Hence, it would be more correct to describe the 'default behaviour' instead of 'behaviour' of MongoDB or Cassandra as CP or AP. First, it fails to consider that in normal operations, there is always a tradeoff between consistency and latency. Second, it considers the behaviour of a distributed system only during a failure condition (the network partition).
+The PACELC theorem was proposed by Daniel Abadi in 2010 to address two major oversights of CAP.
 
-Google BigTable https://www.google.com/search?q=domain-reversed+URL+bigtable&sxsrf=APq-WBsleuuuePA0n0Y3C5-ali0v_Y2-rQ:1645599856489&source=lnms&tbm=isch&sa=X&ved=2ahUKEwiis42XoZX2AhVuUvUHHdyZCEoQ_AUoAXoECAEQAw&biw=1396&bih=663&dpr=1.38#imgrc=dd3ZdOLPxxWIcM
+PACELC is summarized as follows: In the event of a partition failure, a distributed system must choose between Availability (A) and Consistency, 
+
+else (E) when running normally it must choose between latency (L) or consistency (C).
+
+The default versions of DynamoDB, Cassandra, Riak and Cosmos DB are PA/EL (else latency) systems: if a partition occurs, they give up consistency for availability, and under normal operation they give up consistency for lower latency.
+
+MongoDB can be classified as a PA/EC (else consistency) system. In the baseline case, the system guarantees reads and writes to be consistent.
+
+MongoDB is classified as a PC+EC system. During normal operations and during partition failures, it emphasizes consistency.
+
+Cassandra is a PA+EL system. During a partition failure it favors availability. Under normal operations, Cassandra gives up consistency for lower latency. However, like CAP, PACELC describes a default behavior
+
+(As an aside, ***there are no distributed systems that are AC*** or PC+EC. These categories describe stand-alone ACID-compliant relational database management systems).
+
+----------------------------------------------------------------------------------
+
+Minimum number of servers required to run the Zookeeper is called Quorum. Zookeeper replicates whole data tree to all the quorum servers.
+
+----------------------------------------------------------------------------------
+
+Eventually-consistent services are often classified as providing BASE semantics (basically-available, soft-state, eventual consistency), in contrast to traditional ACID (atomicity, consistency, isolation, durability). In chemistry, a base is the opposite of an acid, which helps in remembering the acronym. According to the same resource, these are the rough definitions of each term in BASE:
+
+Basically available: reading and writing operations are available as much as possible (using all nodes of a database cluster), but might not be consistent (the write might not persist after conflicts are reconciled, the read might not get the latest write)
+Soft-state: without consistency guarantees, after some amount of time, we only have some probability of knowing the state, since it might not yet have converged
+Eventually consistent: If we execute some writes and then the system functions long enough, we can know the state of the data; any further reads of that data item will return the same value
+Eventual consistency is sometimes criticized[8] as increasing the complexity of distributed software applications. This is partly because eventual consistency is purely a liveness guarantee (reads eventually return the same value) and does not guarantee safety: an eventually consistent system can return any value before it converges.
+
+-------
+
+------
+
+-----------
 
 Amazon Web Services (AWS) offers many types of databases on the cloud - DynamoDB, DocumentDB, MemoryDB, ElasticCache, Aurora, RedShift, among many others. Such diversity may be confusing to non-experts, considering the technologies behind DynamoDB, DocumentDB and MemoryDB - Dynamo, MongoDB and Redis, are essentially NoSQL key-value stores. In fact, their differences are numerous and these databases have divergent use cases.
 
@@ -126,3 +157,8 @@ Using the SELECT statement in this way returns all the songs associated with thi
 * Lakshman, A., & Malik, P. (2009). *Cassandra - A Decentralized Structured Storage System*. Retrieved February 24, 2022, from https://www.cl.cam.ac.uk/~ey204/teaching/ACS/R212_2014_2015/papers/lakshman_ladis_2009.pdf 
 * MongoDB. (2020, May). *MongoDB Multi-Document ACID Transactions*. Retrieved February 24, 2022, from https://webassets.mongodb.com/MongoDB_Multi_Doc_Transactions.pdf 
 * Jepsen
+
+https://db-engines.com/en/system/Amazon+DynamoDB%3BMongoDB%3BRedis
+https://dynobase.com/dynamodb-common-misconceptions/
+
+Google BigTable https://www.google.com/search?q=domain-reversed+URL+bigtable&sxsrf=APq-WBsleuuuePA0n0Y3C5-ali0v_Y2-rQ:1645599856489&source=lnms&tbm=isch&sa=X&ved=2ahUKEwiis42XoZX2AhVuUvUHHdyZCEoQ_AUoAXoECAEQAw&biw=1396&bih=663&dpr=1.38#imgrc=dd3ZdOLPxxWIcM
