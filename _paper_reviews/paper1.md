@@ -6,9 +6,6 @@ Among web applications architures, the traditional monolithic model is obsolete.
 
 A network of loosely coupled microservices. There is a tendancy to even break down microservices into nanoservices. For instance, dataset augmentation can be defined as one nanoservice. A prominent example is Amazon Lambda, which is named after lambda functions.
 
-Liu, K., & Boehm, J. (2015). Classification of big point cloud data using cloud computing. ISPRS-International Archives of the Photogrammetry, Remote Sensing and Spatial Information Sciences 40, 553-557. Retrieved February 24, 2022, from https://discovery.ucl.ac.uk/id/eprint/1471584/1/isprsarchives-XL-3-W3-553-2015.pdf 
-
-
 Machine learning like processing computer graphics (CG) data is becoming more and more challenging due to the growing data volume. In this paper, we address point data classification in a big data context. The popular cluster computing framework Apache Spark is used through the experiments and the promising results suggests a great potential of Apache Spark for large-scale point data processing.
 
 The architecture lacks granularity: a modern cloud application is usually laid out as a network of micro(/nano)services. For example, data augmentation can be one microservice in the pipeline.
@@ -120,3 +117,7 @@ Break down into nanoservices:
 2. Break down (tile) the dataset if it is too large
 
 The same applies to point cloud, images, etc
+
+# Bibliography
+
+* Liu, K., & Boehm, J. (2015). *Classification of Big Point Cloud Data Using Cloud Computing*. ISPRS-International Archives of the Photogrammetry, Remote Sensing and Spatial Information Sciences 40, 553-557. Retrieved February 24, 2022, from https://discovery.ucl.ac.uk/id/eprint/1471584/1/isprsarchives-XL-3-W3-553-2015.pdf 
