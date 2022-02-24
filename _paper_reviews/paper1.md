@@ -1,8 +1,11 @@
 #### Review of *Classification of Big Point Cloud Data Using Cloud Computing (Liu, Boehm 2015)*
 
-Monolithic is the worst
+Todo: Multiple masters Visio...
 
-Multiple masters Visio...
+Traditional monolithic architeture is obsolete. The upper bound for performance gain is lower scaling up than scaling out in the cloud, and not cost-effective.
+A network of loosely coupled microservices. There is a tendancy to even break down microservices into nanoservices. For instance, dataset augmentation can be defined as one nanoservice. A prominent example is Amazon Lambda, which is named after lambda functions.
+
+
 
 Google Colaboratory (Colab) lacks integration with anything other than Google Drive and Google Cloud platform, hard limit on hard disk, GPU VRAM and RAM. Storage is not always on SSD.
 
