@@ -1,5 +1,7 @@
 # Review of *Classification of Big Point Cloud Data Using Cloud Computing (Liu, Boehm 2015)*
 
+## Introduction
+
 Todo: Multiple masters Visio...
 
 Among web applications architures, the traditional monolithic model is obsolete. The upper bound for performance gain is lower scaling up than scaling out in the cloud, suffers from high coupling, services may have common sources of failure, and not cost-effective. 
@@ -16,7 +18,10 @@ Timeliness is a critical factor for many use cases of CG processing.
 To address possible scalability issues in that work, two alternative architectures for CG processing using Amazon EC2 instances are presented. Simple benchmarking has been done to test the efficiency of these cloud architectures.
 
 -------------------------------------------------------------
+## Summary of the Work
+TODO
 
+## Alternative architectures
 #### IoT Example
 Nadir cameras (RGB or LiDAR) like the image below [Fairbanks_Circle.png]. Smart City lampposts. Scale out G5 GPU EC2 instances. Stream of images. May need ZeroMQ or MQTT installed in the master node to ensure the fairness of each camera...
 
@@ -118,6 +123,6 @@ Break down into nanoservices:
 
 The same applies to point cloud, images, etc
 
-# Bibliography
+## Bibliography
 
 * Liu, K., & Boehm, J. (2015). *Classification of Big Point Cloud Data Using Cloud Computing*. ISPRS-International Archives of the Photogrammetry, Remote Sensing and Spatial Information Sciences 40, 553-557. Retrieved February 24, 2022, from https://discovery.ucl.ac.uk/id/eprint/1471584/1/isprsarchives-XL-3-W3-553-2015.pdf 
