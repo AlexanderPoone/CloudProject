@@ -2,6 +2,7 @@
 
 Monolithic is the worst
 
+Multiple masters Visio...
 
 GPU instance Visio
 
