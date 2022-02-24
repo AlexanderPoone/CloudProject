@@ -1,5 +1,8 @@
 #### Review of *Classification of Big Point Cloud Data Using Cloud Computing (Liu, Boehm 2015)*
 
+Monolithic is the worst
+
+
 GPU instance Visio
 
 Google Colaboratory (Colab) lacks integration with anything other than Google Drive and Google Cloud platform, hard limit on hard disk, GPU VRAM and RAM. Storage is not always on SSD.
