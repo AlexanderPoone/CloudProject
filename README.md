@@ -52,10 +52,8 @@ Note that this is a problem similar to that faced by rsync.
   - [https://news.ycombinator.com/item?id=2478567](https://news.ycombinator.com/item?id=2478567)
 The algorithm must be designed with special care to avoid birthday attacks:
 https://en.wikipedia.org/wiki/Birthday_attack
-
+* CommVault / AWS Glacier
 * StorReduce on Amazon
-
-https://www.google.com/search?q=commvault+deduplication&oq=commvault+deduplication&aqs=chrome..69i57j0i512l2j0i30l7.9405j0j7&sourceid=chrome&ie=UTF-8
 
 ## References
 
