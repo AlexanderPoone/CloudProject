@@ -120,3 +120,9 @@ SELECT AlbumTitle, Year, Price
 FROM Music
 WHERE Artist='No One You Know' 
 Using the SELECT statement in this way returns all the songs associated with this particular Artist.
+
+# Bibliiography
+* DeCandia, G., Hastorun, D., Jampani, M., & Kakulapati, G. (2007). *Dynamo: Amazon’s Highly Available Key-value Store*. Retrieved February 24, 2022, from https://www.allthingsdistributed.com/files/amazon-dynamo-sosp2007.pdf
+* Lakshman, A., & Malik, P. (2009). *Cassandra - A Decentralized Structured Storage System*. Retrieved February 24, 2022, from https://www.cl.cam.ac.uk/~ey204/teaching/ACS/R212_2014_2015/papers/lakshman_ladis_2009.pdf 
+* MongoDB. (2020, May). *MongoDB Multi-Document ACID Transactions*. Retrieved February 24, 2022, from https://webassets.mongodb.com/MongoDB_Multi_Doc_Transactions.pdf 
+* Jepsen
