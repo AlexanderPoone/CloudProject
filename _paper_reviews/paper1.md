@@ -1,4 +1,4 @@
-#### Review of *Classification of Big Point Cloud Data Using Cloud Computing (Liu, Boehm 2015)*
+# Review of *Classification of Big Point Cloud Data Using Cloud Computing (Liu, Boehm 2015)*
 
 Todo: Multiple masters Visio...
 
