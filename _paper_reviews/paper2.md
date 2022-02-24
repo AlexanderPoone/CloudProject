@@ -1,4 +1,4 @@
-### Review of Amazon DynamoDB
+### Review of Amazon's Dynamo paper (2007)
 #### Finding a needle in a haystack: A Comprehensive Comparative Analysis between two AWS database engines: DynamoDB and DocumentDB
 Critical review
 
