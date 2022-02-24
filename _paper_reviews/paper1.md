@@ -2,21 +2,12 @@
 
 Todo: Multiple masters Visio...
 
-Among web applications architures, the traditional monolithic model is obsolete. The upper bound for performance gain is lower scaling up than scaling out in the cloud, suffers from high coupling, services may have common sources of failure, and not cost-effective.
+Among web applications architures, the traditional monolithic model is obsolete. The upper bound for performance gain is lower scaling up than scaling out in the cloud, suffers from high coupling, services may have common sources of failure, and not cost-effective. 
 
 A network of loosely coupled microservices. There is a tendancy to even break down microservices into nanoservices. For instance, dataset augmentation can be defined as one nanoservice. A prominent example is Amazon Lambda, which is named after lambda functions.
 
+Liu, K., & Boehm, J. (2015). Classification of big point cloud data using cloud computing. ISPRS-International Archives of the Photogrammetry, Remote Sensing and Spatial Information Sciences 40, 553-557. Retrieved February 24, 2022, from https://discovery.ucl.ac.uk/id/eprint/1471584/1/isprsarchives-XL-3-W3-553-2015.pdf 
 
-
-Google Colaboratory (Colab) lacks integration with anything other than Google Drive and Google Cloud platform, hard limit on hard disk, GPU VRAM and RAM. Storage is not always on SSD.
-
-discovery.ucl.ac.uk
-
-[Classification of big point cloud data using cloud computing](https://discovery.ucl.ac.uk/id/eprint/1471584/1/isprsarchives-XL-3-W3-553-2015.pdf)
-
-Kun Liu, Jan Boehm
-
-ISPRS-International Archives of the Photogrammetry, Remote Sensing and Spatial Information Sciences 40, 553-557, 2015
 
 Machine learning like processing computer graphics (CG) data is becoming more and more challenging due to the growing data volume. In this paper, we address point data classification in a big data context. The popular cluster computing framework Apache Spark is used through the experiments and the promising results suggests a great potential of Apache Spark for large-scale point data processing.
 
