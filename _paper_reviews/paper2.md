@@ -15,13 +15,13 @@ PACELC is summarized as follows: In the event of a partition failure, a distribu
 
 else (E) when running normally it must choose between latency (L) or consistency (C).
 
-The default versions of DynamoDB, Cassandra, Riak and Cosmos DB are PA/EL (else latency) systems: if a partition occurs, they give up consistency for availability, and under normal operation they give up consistency for lower latency.
+DynamoDB and Cassandra are PA/EL (else latency) systems: if a partition occurs, they give up consistency for availability, and under normal operation they give up consistency for lower latency. / During a partition failure it favors availability. Under normal operations, Cassandra gives up consistency for lower latency. However, like CAP, PACELC describes a default behavior
+
 
 MongoDB can be classified as a PA/EC (else consistency) system. In the baseline case, the system guarantees reads and writes to be consistent.
 
 MongoDB is classified as a PC+EC system. During normal operations and during partition failures, it emphasizes consistency.
 
-Cassandra is a PA+EL system. During a partition failure it favors availability. Under normal operations, Cassandra gives up consistency for lower latency. However, like CAP, PACELC describes a default behavior
 
 (As an aside, ***there are no distributed systems that are AC*** or PC+EC. These categories describe stand-alone ACID-compliant relational database management systems).
 
