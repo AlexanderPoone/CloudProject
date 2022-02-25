@@ -152,11 +152,11 @@ FROM Music
 WHERE Artist='No One You Know' 
 Using the SELECT statement in this way returns all the songs associated with this particular Artist.
 
-# Bibliiography
+# Bibliography
 * DeCandia, G., Hastorun, D., Jampani, M., & Kakulapati, G. (2007). *Dynamo: Amazon’s Highly Available Key-value Store*. Retrieved February 24, 2022, from https://www.allthingsdistributed.com/files/amazon-dynamo-sosp2007.pdf
 * Lakshman, A., & Malik, P. (2009). *Cassandra - A Decentralized Structured Storage System*. Retrieved February 24, 2022, from https://www.cl.cam.ac.uk/~ey204/teaching/ACS/R212_2014_2015/papers/lakshman_ladis_2009.pdf 
 * MongoDB. (2020, May). *MongoDB Multi-Document ACID Transactions*. Retrieved February 24, 2022, from https://webassets.mongodb.com/MongoDB_Multi_Doc_Transactions.pdf 
-* Jepsen
+* Kingsbury, K. (2020, May 15). *MongoDB 4.2.6 - Jepsen*. Retrieved February 25, 2022, from https://jepsen.io/analyses/mongodb-4.2.6.pdf
 
 https://db-engines.com/en/system/Amazon+DynamoDB%3BMongoDB%3BRedis
 https://dynobase.com/dynamodb-common-misconceptions/
