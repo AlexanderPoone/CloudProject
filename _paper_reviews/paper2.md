@@ -1,4 +1,10 @@
 ### Review of Amazon's Dynamo paper (2007)
+
+Snapshot isolation
+https://en.wikipedia.org/wiki/Snapshot_isolation
+
+snapshot isolation is a guarantee that all reads made in a transaction will see a consistent snapshot of the database (in practice it reads the last committed values that existed at the time it started), and the transaction itself will successfully commit only if no updates it has made conflict with any concurrent updates made since that snapshot.
+
 #### Finding a needle in a haystack: A Comprehensive Comparative Analysis between two AWS database engines: DynamoDB and DocumentDB
 Critical review
 
