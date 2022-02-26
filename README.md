@@ -1,7 +1,7 @@
 # Cloud Computing Project
 **DRAFT**
 
-## Scalable Real-time IoT Graphics Deep Learning on the Cloud
+## Scalable and Compatible Real-time IoT Graphics Deep Learning on the Cloud
 
 <!--
 56200477 Poon Bing-chun
