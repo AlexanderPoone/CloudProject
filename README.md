@@ -2,6 +2,7 @@
 **DRAFT**
 
 ## Scalable and Compatible Real-time IoT Graphics Deep Learning on the Cloud
+**Group 8**
 
 ## Group members
 56200477 Poon Bing-chun
