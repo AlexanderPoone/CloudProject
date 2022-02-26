@@ -2,7 +2,10 @@
 **DRAFT**
 
 <!--
-56200477
+56200477 Poon Bing-chun
+55628042 Li Ka Faat
+56767955 Wu Yidu
+5
 -->
 
 There are quite a few works that tackle real-time computer vision computations on the cloud, like object detection, semantic segmentation and collision avoidance. For example, the paper by Liu and Boehm [1] uses Apache Spark and Amazon EC2 to achieve point cloud classification. However, some critical issues are often neglected. For example, the mentioned does not address the issue of fairness. A bad scenario would be, the live vehicle counts of some CCTVs are not updating because they do not get the fair share. The other extreme would be a deadlock, the master keeps waiting for a CCTV to respond.
