@@ -17,4 +17,4 @@ We trained an object tracking deep learning model based on Tracktor and ResNet-1
 
 Each CCTV subscribes to the master. Once a CCTV is removed, then the EC2 instance will be terminated, it unsubscribes from the pub/sub model. Real use cases include: new CCTV installed, the user adds its URL; a CCTV enters maintenance mode (unreachable), or alternatively, for energy-conserving purpose its operation hours are limited, it disconnects.
 
- 
+We will implement everything in basic Python, HTML and JavaScript. If we have extra time, we can implement a cross-platform front end using Flutter, which compiles to Android, iOS, Linux, web and more.
