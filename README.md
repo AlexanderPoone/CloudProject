@@ -1,7 +1,7 @@
 # Cloud Computing Project
 **DRAFT**
 
-## Scalable and Compatible Real-time IoT Graphics Deep Learning for Traffic Analysis on the Cloud
+## Scalable and Compatible Real-time IoT Graphics Deep Learning for Traffic Analysis using Cloud Computing 
 **Group 8**
 
 ## Group members
