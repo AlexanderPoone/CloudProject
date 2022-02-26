@@ -34,12 +34,15 @@ The m3u8 format is standard for video streaming, you can get the URLs by Chrome 
 YouTube videos are easy to convert to m3u8 (Japan):
 * https://www.youtube.com/watch?v=-0RZ0K984nA
 
-We trained an object tracking deep learning model based on Tracktor and ResNet-101. As long as the cameras are in nadir position (perpendicular to the horizon), or in other words, not too oblique, the same model can be reused.
+We have trained a *multiple object tracking (MOT)* deep learning model based on Tracktor and ResNet-101 on eight types of vehicles. As long as the cameras are in a nadir position (perpendicular to the horizon), or in other words, not too oblique, the same model can be reused. The greatest advantage of MOT over object detection is that it is resilient to both partial and total occlusion.
 
 Each CCTV subscribes to the master. Once a CCTV is removed, then the EC2 instance will be terminated, it unsubscribes from the subscriber model. Real use cases include: new CCTV installed, the user adds its URL; a CCTV enters maintenance mode (unreachable), or alternatively, for energy-conserving purpose its operation hours are limited, it disconnects.
 
 ### Preliminary architecture design
 Note that the design is subject to change. The subscriber model is implemented using websockets.
+
+An advantage of using cloud computing for deep learning is, if we have multiple deep learning models, we can harness multiple EC2 instances to perform model blending or model stacking, improving the accuracy of the object tracking, without loss of computing performance. 
+
 ![project_pipeline.png](project_pipeline.png)
 
 ## Technologies used
