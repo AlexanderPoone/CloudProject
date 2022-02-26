@@ -7,7 +7,7 @@ Scalability would be another issue. As the system network keeps expanding, some 
 
 For some papers, their orchestrations are unknown. For example if the live stream is not reachable after how many minutes, the EC2 should be shut down to save resources. Borrowed from Kubenetes parlance, orchestration includes liveliness tests and readiness tests.
 
-Thus, we are building an alternative system that is lightweight and scalable. In a nutshell, the user can add or remove URLs of CCTV live streams (\*.m3u8) to the application. Therefore, it should even be compatible with YouTube streams. Once such URL is added, a new Amazon EC2 instance will be created to do object detection. Then the real-time vehicle count will be collected and visualized. Instead of the sequential pipeline like the Liu/Boehm paper, we will use the pub/sub model to communicate between EC2 instances.
+Thus, we are building an alternative system that is lightweight and scalable. In a nutshell, the user can add or remove URLs of CCTV live streams (\*.m3u8) to the application. Therefore, it should even be compatible with YouTube streams. Once such URL is added, a new Amazon EC2 instance will be created to do object detection. Then the real-time vehicle count will be collected and visualized. Instead of the sequential pipeline like the Liu/Boehm paper, we will use the pub/sub model (socket programming) to communicate between EC2 instances.
 
 The m3u8 format is standard for video streaming, you can get the URLs by Chrome F12 > Network tab > Search 'm3u8':
 * https://www.hkemobility.gov.hk/en/traffic-information/live/webcast 
