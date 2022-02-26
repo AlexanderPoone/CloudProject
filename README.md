@@ -26,7 +26,8 @@ Thus, we are building an alternative system that is lightweight and scalable. In
 The m3u8 format is standard for video streaming, you can get the URLs by Chrome F12 > Network tab > Search 'm3u8':
 * https://www.hkemobility.gov.hk/en/traffic-information/live/webcast 
 * http://www32.ha.org.hk/capitalworksprojects/en/Project/10years/United-Christian-Hospital/Introduction.html
-Or even YouTube (Japan):
+
+YouTube videos are easy to convert to m3u8 (Japan):
 * https://www.youtube.com/watch?v=-0RZ0K984nA
 
 We trained an object tracking deep learning model based on Tracktor and ResNet-101. As long as the cameras are in nadir position (perpendicular to the horizon), or in other words, not too oblique, the same model can be reused.
