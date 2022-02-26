@@ -46,5 +46,18 @@ We will implement everything in basic Python, HTML and JavaScript. We can progra
 
 If we have extra time, we can implement a cross-platform front end using Flutter, which compiles to Android, iOS, Linux, web and more.
 
+## IMPORTANT
+**To use the AWS Client Library boto3, you should have [AWS Command Line Interface](https://aws.amazon.com/cli/) installed (for security purposes) and run**
+```
+aws configure
+```
+**to [log into your account](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-quickstart.html).**
+
+## Requirements
+To install the dependencies, enter the following in the command line:
+```
+pip3 install -r requirements.txt
+```
+
 ## Bibliography
 [1] Liu, K., & Boehm, J. (2015). *Classification of Big Point Cloud Data Using Cloud Computing*. ISPRS-International Archives of the Photogrammetry, Remote Sensing and Spatial Information Sciences 40, 553-557. Retrieved February 24, 2022, from https://discovery.ucl.ac.uk/id/eprint/1471584/1/isprsarchives-XL-3-W3-553-2015.pdf
