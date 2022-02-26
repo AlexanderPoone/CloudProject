@@ -1,7 +1,5 @@
 '''
 Cloud Computing Project Client REST API
-海洋・湖沼・河川を航行する船舶
-ヴァン・ベートーヴェン
 '''
 import boto3
 import botocore
