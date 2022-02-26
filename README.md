@@ -16,6 +16,7 @@ Scalability would be another issue. As the system network keeps expanding, some 
 
 For some papers, their *orchestrations* are unknown. For example if the live stream is not reachable after how many minutes, the EC2 should be shut down. Mishandling this important cloud computing concept may lead to coordination problems, or waste of resource (and money). Borrowed from Kubenetes parlance, orchestration includes performing liveliness tests and readiness tests.
 
+## Implementation
 Thus, we are building an alternative system that is lightweight and scalable. In a nutshell, the user can add or remove URLs of CCTV live streams (\*.m3u8) to the application. Therefore, it should even be compatible with YouTube streams. Once such URL is added, a new Amazon EC2 instance will be created to do object detection. Then the real-time vehicle count will be collected and visualized. Instead of the sequential pipeline like the Liu/Boehm paper, we will use the pub/sub model (socket programming) to communicate between EC2 instances.
 
 The m3u8 format is standard for video streaming, you can get the URLs by Chrome F12 > Network tab > Search 'm3u8':
@@ -26,7 +27,8 @@ We trained an object tracking deep learning model based on Tracktor and ResNet-1
 
 Each CCTV subscribes to the master. Once a CCTV is removed, then the EC2 instance will be terminated, it unsubscribes from the pub/sub model. Real use cases include: new CCTV installed, the user adds its URL; a CCTV enters maintenance mode (unreachable), or alternatively, for energy-conserving purpose its operation hours are limited, it disconnects.
 
-We will implement everything in basic Python, HTML and JavaScript. We can programmatically create EC2 instances using the Boto3 library. Commands can be issued programmatically using the paramiko library, which is basically a SSH (Secure Shell) wrapper.
+## Technologies used
+We will implement everything in basic Python, HTML and JavaScript. We can programmatically create EC2 instances using the **Boto3** library, which is the official Python client for everything AWS, made by Amazon themselves. Commands can be issued programmatically using the **paramiko** library, which is basically a SSH (Secure Shell) wrapper.
 
 If we have extra time, we can implement a cross-platform front end using Flutter, which compiles to Android, iOS, Linux, web and more.
 
