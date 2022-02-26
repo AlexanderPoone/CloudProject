@@ -3,12 +3,11 @@
 
 ## Scalable and Compatible Real-time IoT Graphics Deep Learning on the Cloud
 
-<!--
+## Group members
 56200477 Poon Bing-chun
 55628042 Li Ka Faat
 56767955 Wu Yidu
 5
--->
 
 ## Website
 [https://github.com/SoftFeta/CloudProject](https://github.com/SoftFeta/CloudProject)
