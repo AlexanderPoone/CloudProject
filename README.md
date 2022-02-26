@@ -5,5 +5,4 @@ There are quite a few works that tackle real-time computer vision computations o
 
 Thus, we are building an alternative system that is lightweight and scalable. In a nutshell, the user can add or remove URLs of CCTV live streams (\*.m3u8) to the application. Once such URL is added, a new EC2 instance will be created to do object detection. Then the real-time vehicle count will be collected and visualized. Instead of the sequential pipeline like the Liu/Boehm paper, we will use the pub/sub model to communicate between EC2 instances.
 
-Each CCTV subscribes to the master. If CCTV is removed, then the EC2 instance will be terminated, it unsubscribes from the pub/sub model
-Real case: new CCTV installed, you add it; CCTV under maintenance, you disconnect it. Or for energy-conserving purpose the operation hours are limited, you disconnect it.
+Each CCTV subscribes to the master. Once a CCTV is removed, then the EC2 instance will be terminated, it unsubscribes from the pub/sub model. Real use cases include: new CCTV installed, the user adds its URL; a CCTV enters maintenance mode (unreachable), or alternatively, for energy-conserving purpose its operation hours are limited, it disconnects.
