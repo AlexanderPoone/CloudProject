@@ -5,4 +5,8 @@ There are quite a few works that tackle real-time computer vision computations o
 
 Thus, we are building an alternative system that is lightweight and scalable. In a nutshell, the user can add or remove URLs of CCTV live streams (\*.m3u8) to the application. Therefore, it should even be compatible with YouTube streams. Once such URL is added, a new Amazon EC2 instance will be created to do object detection. Then the real-time vehicle count will be collected and visualized. Instead of the sequential pipeline like the Liu/Boehm paper, we will use the pub/sub model to communicate between EC2 instances.
 
+We trained an object tracking deep learning model based on Tracktor and ResNet-101. As long as the cameras are in nadir position (perpendicular to the horizon), or in other words, not very oblique. The same model can be used.
+
 Each CCTV subscribes to the master. Once a CCTV is removed, then the EC2 instance will be terminated, it unsubscribes from the pub/sub model. Real use cases include: new CCTV installed, the user adds its URL; a CCTV enters maintenance mode (unreachable), or alternatively, for energy-conserving purpose its operation hours are limited, it disconnects.
+
+ 
