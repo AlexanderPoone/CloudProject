@@ -11,8 +11,7 @@ import asyncio
 from time import time
 import websockets
 
-
-start = time.time()
+#  Connect
 
 #  Custom program
 

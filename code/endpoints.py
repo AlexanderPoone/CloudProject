@@ -5,7 +5,7 @@ import boto3
 import botocore
 import paramiko
 
-from flask import Flask, jsonify, request, send_from_directory, abort, send_file
+from flask import Flask, jsonify, request, send_from_directory, abort, send_file, render_template
 from flask_cors import CORS
 
 from hashlib import sha512
@@ -23,6 +23,16 @@ tableUsers = client.Table("users")
 print(tableUsers.table_status)
 tableDedupSequence = client.Table("dedupSequence")
 print(tableDedupSequence.table_status)
+
+@app.route('/', methods = ['GET'])
+def test():
+	return render_template('addcamera.jinja',
+		activeEc2=[{
+			'url': 'https://s20.ipcamlive.com/streams/14ubd8f7onwbk5ozv/stream.m3u8',
+			'camera_id': 'kai_tak_road',
+			'status': 1
+		}],
+		enteringDict={})
 
 @app.route('/login', methods = ['POST'])
 def login():
