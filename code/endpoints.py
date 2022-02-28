@@ -25,7 +25,7 @@ tableDedupSequence = client.Table("dedupSequence")
 print(tableDedupSequence.table_status)
 
 @app.route('/', methods = ['GET'])
-def test():
+def dashboard():
 	return render_template('addcamera.jinja',
 		activeEc2=[{
 			'url': 'https://s20.ipcamlive.com/streams/14ubd8f7onwbk5ozv/stream.m3u8',
@@ -33,6 +33,10 @@ def test():
 			'status': 1
 		}],
 		enteringDict={})
+
+@app.route('/provision', methods = ['POST'])
+def new_ec2():
+	pass
 
 @app.route('/login', methods = ['POST'])
 def login():
