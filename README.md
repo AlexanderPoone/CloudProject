@@ -1,6 +1,8 @@
 # Cloud Computing Project
 **DRAFT**
 
+Future site: [https://dord.mynetgear.com:18888](https://dord.mynetgear.com:18888)
+
 ## Scalable and Compatible Real-time IoT Graphics Deep Learning for Traffic Analysis using Cloud Computing 
 **Group 8**
 
