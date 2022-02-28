@@ -65,7 +65,7 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
+                    <tr id="urlFirstRow">
                       <td><input type="email" class="form-control" id="m3u8_stream" placeholder="e.g. https://s20.ipcamlive.com/streams/14ubd8f7onwbk5ozv/stream.m3u8"></td>
                       <td><input class="form-control" id="camera_id"></td>
                       <td></td>
@@ -143,6 +143,9 @@
 
     <script type="text/javascript">
         $('#camera_add').click(function() {
+            let m3u8_stream = $('#m3u8_stream').val();
+            let camera_id = $('#camera_id').val();
+            $(`<tr><td>${m3u8_stream}</td><td>${camera_id}</td><td><strong style="color: slategray;"><i class="fad fa-spinner fa-pulse"></i> Creating</strong></td><td></td></tr>`).insertAfter($('#urlFirstRow'));
             fetch(`/getHistorical/${window.historicActiveTab}/${selectedDate.slice(0,4)}/${selectedDate.slice(5,7)}/${selectedDate.slice(8,10)}/${selectedTime.slice(0,2)}`)
             .then(res => res.json())
             .then(res => {
