@@ -4,6 +4,7 @@ Cloud Computing Project Client REST API
 import boto3
 import botocore
 import paramiko
+import websockets
 
 from flask import Flask, jsonify, request, send_from_directory, abort, send_file, render_template
 from flask_cors import CORS
@@ -34,8 +35,14 @@ def dashboard():
 		}],
 		enteringDict={})
 
+# Need to store worker IP address in database
+
 @app.route('/provision', methods = ['POST'])
-def new_ec2():
+def deploy_ec2():
+	pass
+
+@app.route('/unprovision', methods = ['POST'])
+def terminate_ec2():
 	pass
 
 @app.route('/login', methods = ['POST'])

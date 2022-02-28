@@ -43,6 +43,7 @@
         }
     </style>
     <title>Cloud Computing Deep Learning Dashboard</title>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
 </head>
 <body>
     <div id="infoPanel">
@@ -54,6 +55,17 @@
                     <li><a href="https://www.hkemobility.gov.hk/en/traffic-information/live/webcast" target="_blank">https://www.hkemobility.gov.hk/en/traffic-information/live/webcast</a></li>
                     <li><a href="http://www32.ha.org.hk/capitalworksprojects/en/Project/10years/United-Christian-Hospital/Introduction.html" target="_blank">http://www32.ha.org.hk/capitalworksprojects/en/Project/10years/United-Christian-Hospital/Introduction.html</a></li>
                 </ul>
+<p dir="auto">For HKeMobility, the activate sequence is (replace <code>&lt;1,2,3,4&gt;</code> with 1 [Hong Kong Island], 2 [Kowloon], 3 [Tsuen Wan] or 4 [Tuen Mun]):</p>
+<div class="snippet-clipboard-content position-relative overflow-auto" data-snippet-clipboard-copy-content="https://www.hkemobility.gov.hk/tc/traffic-information/live/webcast
+
+document.querySelector('#app &gt; div &gt; main &gt; div &gt; div &gt; div.row.main-panel-container.no-gutters &gt; div.app-left-panel.white.col &gt; div &gt; div.flex-grow-container.pa-2.white &gt; div.flex-grow-1.fill-height.overflow-y-auto.px-1 &gt; div &gt; div.pb-2.flex-shrink-0.v-item-group.theme--light.v-btn-toggle.v-btn-toggle--tile.teal--text.text--accent-3 &gt; button:nth-child(&lt;1,2,3,4&gt;)').click()"><pre><code>https://www.hkemobility.gov.hk/tc/traffic-information/live/webcast
+
+document.querySelector('#app &gt; div &gt; main &gt; div &gt; div &gt; div.row.main-panel-container.no-gutters &gt; div.app-left-panel.white.col &gt; div &gt; div.flex-grow-container.pa-2.white &gt; div.flex-grow-1.fill-height.overflow-y-auto.px-1 &gt; div &gt; div.pb-2.flex-shrink-0.v-item-group.theme--light.v-btn-toggle.v-btn-toggle--tile.teal--text.text--accent-3 &gt; button:nth-child(&lt;1,2,3,4&gt;)').click()
+</code></pre></div>
+<p dir="auto">The subprocess command becomes:</p>
+<div class="snippet-clipboard-content position-relative overflow-auto" data-snippet-clipboard-copy-content="ffmpeg -headers &quot;authority: www.hkemobility.gov.hk`r`nsec-ch-ua: 'Chromium';v='97', ' Not;A Brand';v='99'`r`nsec-ch-ua-mobile: ?0`r`nUser-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4691.0 Safari/537.36`r`nsec-ch-ua-platform: 'Windows'`r`naccept: */*`r`nsec-fetch-site: same-origin`r`nsec-fetch-mode: cors`r`nsec-fetch-dest: empty`r`nreferer: https://www.hkemobility.gov.hk/tc/traffic-information/live/webcast`r`naccept-language: en-US,en;q=0.9`r`ncookie:  language=zh-HK`r`n&quot; -i &quot;&lt;to be completed by selenium-wire&gt;&quot; -vsync 0 -vf fps=5 one%d.jpg"><pre><code>ffmpeg -headers "authority: www.hkemobility.gov.hk`r`nsec-ch-ua: 'Chromium';v='97', ' Not;A Brand';v='99'`r`nsec-ch-ua-mobile: ?0`r`nUser-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4691.0 Safari/537.36`r`nsec-ch-ua-platform: 'Windows'`r`naccept: */*`r`nsec-fetch-site: same-origin`r`nsec-fetch-mode: cors`r`nsec-fetch-dest: empty`r`nreferer: https://www.hkemobility.gov.hk/tc/traffic-information/live/webcast`r`naccept-language: en-US,en;q=0.9`r`ncookie:  language=zh-HK`r`n" -i "&lt;to be completed by selenium-wire&gt;" -vsync 0 -vf fps=5 one%d.jpg
+</code></pre></div>
+<p dir="auto">On subprocess exit (one security feature added is a two-minute timeout), call <code>ffmpeg</code> again.</p>
                 <br>
                 <table class="table table-striped">
                   <thead>
@@ -84,7 +96,7 @@
                         <strong style="color: red;"><i class="fad fa-dizzy"></i> Unreachable</strong>
                       {% endif %}
                       </td>
-                      <td><button class="btn btn-danger btn-sm" id="{{ ec2.camera_id }}_remove"><i class="fad fa-video-slash"></i> Remove CCTV (*.m3u8)</button></td>
+                      <td><button class="btn btn-danger btn-sm camera-remove" id="{{ ec2.camera_id }}_remove"><i class="fad fa-video-slash"></i> Remove CCTV (*.m3u8)</button></td>
                     </tr>
                   {% endfor %}
                   </tbody>
@@ -96,6 +108,7 @@
             <h5 class="card-header"><i class="fad fa-signal-stream fa-lg fa-fw"></i>&nbsp;&nbsp;<span data-i18n="live">Live Traffic</span><br>(processed by DeepSORT-ResNet101)</h5>
             <div class="card-body">
                 <p>Click on one of the URLs above to see live footage.</p>
+                <p dir="auto">Since the Transport Department overhauled their page and added security features, the code has been outdated. A workaround is being made.</p>
                 <div id="live1frame">
                     <img src="static/live.gif" width="100px" style="margin: 30px; position: absolute;">
                     <canvas id="match1_" class="overlays overlay5" width="960" height="540"></canvas>
@@ -149,6 +162,15 @@
             fetch(`/provision`)
             .then(res => res.json())
             .then(res => {
+                console.log(res):
+            });
+        });
+        $('.camera_remove').click(function(evt) {
+            console.log(evt);
+            fetch(`/unprovision`)
+            .then(res => res.json())
+            .then(res => {
+                console.log(res):
             });
         });
     </script>
