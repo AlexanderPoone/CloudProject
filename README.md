@@ -1,8 +1,6 @@
 # Cloud Computing Project
 **DRAFT**
 
-Future site: [https://dord.mynetgear.com:18888](https://dord.mynetgear.com:18888)
-
 ## Scalable and Compatible Real-time IoT Graphics Deep Learning for Traffic Analysis using Cloud Computing 
 **Group 8**
 
@@ -15,8 +13,13 @@ Future site: [https://dord.mynetgear.com:18888](https://dord.mynetgear.com:18888
 
 55628042 Li Ka Faat
 
-## Website
-[https://github.com/SoftFeta/CloudProject](https://github.com/SoftFeta/CloudProject)
+## Demo Website
+Future site: [https://dord.mynetgear.com:18888](https://dord.mynetgear.com:18888)
+
+## Project Website
+* [Docker Image](https://github.com/SoftFeta/CloudProject), the image should be attached to a cloud compute instance, see the requirements below.
+* GitHub: [https://github.com/SoftFeta/CloudProject](https://github.com/SoftFeta/CloudProject)
+
 ## Objectives
 We are doing a **research topic**.
 
