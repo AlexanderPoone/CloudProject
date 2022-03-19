@@ -5,7 +5,9 @@ import boto3
 import botocore
 import paramiko
 import websockets
+import threading
 
+import docker
 from flask import Flask, jsonify, request, send_from_directory, abort, send_file, render_template
 from flask_cors import CORS
 
@@ -13,6 +15,10 @@ from hashlib import sha512
 from os import urandom
 from os.path import expanduser
 from time import sleep
+from subprocess import Popen, call, run, check_output, CREATE_NO_WINDOW, DEVNULL
+
+import asyncio
+import websockets
 
 app = Flask(__name__)
 CORS(app)
@@ -39,11 +45,27 @@ def dashboard():
 
 @app.route('/provision', methods = ['POST'])
 def deploy_ec2():
-	pass
+	print(request.json)
+
+	# TODO TODO TODO : New container
+	client = docker.from_env()
+	container = client.containers.run("bfirsh/reticulate-splines", detach=True)
+	print(container.id)
+	print(output)
+
+	return {'url': request.json['url'], 'camera_id': request.json['camera_id']}
 
 @app.route('/unprovision', methods = ['POST'])
 def terminate_ec2():
-	pass
+	print(request.json)
+
+	# TODO TODO TODO : New container
+	client = docker.from_env()
+	container = client.containers.run("bfirsh/reticulate-splines", detach=True)
+	print(container.id)
+	print(output)
+
+	return {'camera_id': request.json['camera_id']}
 
 @app.route('/login', methods = ['POST'])
 def login():
@@ -101,5 +123,22 @@ def logout():
 	request.form['session']
 	return
 
+async def echo(websocket):
+    async for message in websocket:
+        await websocket.send(f'Received: {message}')
+
+async def main():
+    async with websockets.serve(echo, "localhost", 8765):
+        await asyncio.Future()  # run forever
+
+def between_callback():
+    loop = asyncio.new_event_loop()
+    asyncio.set_event_loop(loop)
+
+    loop.run_until_complete(main())
+    loop.close()
+
 if __name__ == "__main__":
+    x = threading.Thread(target=between_callback)
+    x.start()
     app.run(host='0.0.0.0', ssl_context=('cert.pem', 'privkey.pem'), port=18888)

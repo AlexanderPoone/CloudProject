@@ -97,7 +97,7 @@ document.querySelector('#app &gt; div &gt; main &gt; div &gt; div &gt; div.row.m
                         <strong style="color: red;"><i class="fad fa-dizzy"></i> Unreachable</strong>
                       {% endif %}
                       </td>
-                      <td><button class="btn btn-danger btn-sm camera-remove" id="{{ ec2.camera_id }}_remove"><i class="fad fa-video-slash"></i> Remove CCTV (*.m3u8)</button></td>
+                      <td><button class="btn btn-danger btn-sm camera_remove" id="{{ ec2.camera_id }}_remove"><i class="fad fa-video-slash"></i> Remove CCTV (*.m3u8)</button></td>
                     </tr>
                   {% endfor %}
                   </tbody>
@@ -134,7 +134,6 @@ document.querySelector('#app &gt; div &gt; main &gt; div &gt; div &gt; div.row.m
                         <th title="Taxis"><img src="static/symbols/taxi.png" height="48px" title="Taxis"></th>
                         <th title="Concrete mixers"><img src="static/symbols/concretemixer.png" height="48px"
                                 title="Concrete mixers"></th>
-                        <th>V/C Ratio</th>
                     </tr>
                     <tr id="entering">
                         <th>Count</th>
@@ -147,7 +146,6 @@ document.querySelector('#app &gt; div &gt; main &gt; div &gt; div &gt; div.row.m
                         <td>{{ enteringDict['shuttlebus'] }}</td>
                         <td>{{ enteringDict['taxi'] }}</td>
                         <td>{{ enteringDict['concretemixer'] }}</td>
-                        <td>{{ enteringDict['entering'] }}</td>
                     </tr>
                 </table>
             </div>
@@ -159,19 +157,35 @@ document.querySelector('#app &gt; div &gt; main &gt; div &gt; div &gt; div.row.m
         $('#camera_add').click(function() {
             let m3u8_stream = $('#m3u8_stream').val();
             let camera_id = $('#camera_id').val();
+            if (m3u8_stream.trim() === '' || camera_id.trim() === '') {
+                alert('Please fill in the CCTV details!');
+                return;
+            }
             $(`<tr><td>${m3u8_stream}</td><td>${camera_id}</td><td><strong style="color: slategray;"><i class="fad fa-spinner fa-pulse"></i> Creating</strong></td><td></td></tr>`).insertAfter($('#urlFirstRow'));
-            fetch(`/provision`)
+            fetch(`/provision`, {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({url: m3u8_stream, camera_id: camera_id})
+              })
             .then(res => res.json())
             .then(res => {
-                console.log(res):
+                console.log(res);
             });
         });
         $('.camera_remove').click(function(evt) {
             console.log(evt);
-            fetch(`/unprovision`)
+            fetch(`/unprovision`, {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({camera_id: $(evt.target).parent().parent().children()[1].textContent})
+              })
             .then(res => res.json())
             .then(res => {
-                console.log(res):
+                console.log(res);
             });
         });
     </script>

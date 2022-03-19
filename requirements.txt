@@ -2,3 +2,5 @@ boto3
 paramiko
 flask
 flask-cors
+docker
+websockets
