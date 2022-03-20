@@ -17,7 +17,7 @@
 Future site: [https://dord.mynetgear.com:18888](https://dord.mynetgear.com:18888)
 
 ## Project Website
-* [Docker Container](https://github.com/SoftFeta/CloudProject/comingsoon.tar), the Docker container should be attached to a cloud compute instance, see the requirements below.
+* [Docker Container](https://dord.mynetgear.com/comingsoon.tar) (~21 GB), the Docker container should be attached to a cloud compute instance, see the requirements below.
 * GitHub: [https://github.com/SoftFeta/CloudProject](https://github.com/SoftFeta/CloudProject)
 
 ## Objectives
