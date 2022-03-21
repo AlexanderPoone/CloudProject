@@ -17,7 +17,7 @@
 Future site: [https://dord.mynetgear.com:18888](https://dord.mynetgear.com:18888)
 
 ## Project Website
-* [Docker Container](https://dord.mynetgear.com/container.tar) (~21 GB), the Docker container should be attached to a cloud compute instance, see the requirements below.
+* [Docker Container](https://dord.mynetgear.com:14443/container.tar) (~21 GB), the Docker container should be attached to a cloud compute instance, see the requirements below.
 
 `conda run -n my-env python demo/demo_mot_vis.py configs/mot/tracktor/my2.py --input "testsuite/unknown_02.mp4" --output "/tbd" --fps 5`
 
