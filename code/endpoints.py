@@ -85,6 +85,11 @@ def dashboard():
     #     }],
     #     enteringDict={})
 
+@app.route('/switchCamera', methods = ['POST'])
+def switchCamera():
+	g_selected_camera = request.json['camid']
+	return
+
 @app.route('/provision', methods = ['POST'])
 def deploy_ec2():
     start = time()
@@ -97,6 +102,12 @@ def deploy_ec2():
     # Create new container from image
     output = check_output('docker run --env NVIDIA_DISABLE_REQUIRE=1 --gpus all -t -d cctv-cuda')
     print('DEBUG: ', client.containers.list())
+
+    # Must use BASH instead of SH
+    exe = client.exec_create(container=my_container, 
+                             cmd=['/bin/bash', '-c' 'touch /somefile'])
+    res = client.exec_start(exec_id=exe)
+
     '''
     container = client.containers.run("bfirsh/reticulate-splines", detach=True)
     print(container.id)
