@@ -14,11 +14,12 @@ from flask_cors import CORS
 from hashlib import sha512
 from os import urandom
 from os.path import expanduser
-from time import sleep
+from time import time, sleep
 from subprocess import Popen, call, run, check_output, CREATE_NO_WINDOW, DEVNULL
 
 import asyncio
 import websockets
+from pickle import loads as ploads
 
 app = Flask(__name__)
 CORS(app)
@@ -31,104 +32,161 @@ print(tableUsers.table_status)
 tableDedupSequence = client.Table("dedupSequence")
 print(tableDedupSequence.table_status)
 
+# Do we need to store worker IP address in database?
+MAX_ALLOWED_INSTANCES = 2
+client = docker.from_env()
+
+g_payload = {}
+g_selected_camera = None
+
+def stream_template(template_name, **context):
+    # http://flask.pocoo.org/docs/patterns/streaming/#streaming-from-templates
+    app.update_template_context(context)
+    t = app.jinja_env.get_template(template_name)
+    rv = t.stream(context)
+    # uncomment if you don't need immediate reaction
+    #rv.enable_buffering(5)
+    return rv
+
 @app.route('/', methods = ['GET'])
 def dashboard():
-	return render_template('addcamera.jinja',
-		activeEc2=[{
-			'url': 'https://s20.ipcamlive.com/streams/14ubd8f7onwbk5ozv/stream.m3u8',
-			'camera_id': 'kai_tak_road',
-			'status': 1
-		}],
-		enteringDict={})
+    def forward_g_payload():
+        global g_selected_camera
+        global g_payload
 
-# Need to store worker IP address in database
+        while True:
+            print('Hi')
+            sleep(1)
+            if len(g_payload) == 0:
+                yield None
+            elif g_selected_camera is None:
+                first = list(g_payload.items()).pop()
+                g_selected_camera = first[0]
+                yield first[1]
+            else:
+                #print(g_payload[g_selected_camera])
+                yield g_payload[g_selected_camera]
+        
+    return app.response_class(stream_template('addcamera.jinja',
+        data=forward_g_payload(),
+        activeEc2=[{
+            'url': 'https://s20.ipcamlive.com/streams/14ubd8f7onwbk5ozv/stream.m3u8',
+            'camera_id': 'kai_tak_road',
+            'status': 1
+        }],
+        enteringDict={}
+    ))
+
+    # return render_template('addcamera.jinja',
+    #     activeEc2=[{
+    #         'url': 'https://s20.ipcamlive.com/streams/14ubd8f7onwbk5ozv/stream.m3u8',
+    #         'camera_id': 'kai_tak_road',
+    #         'status': 1
+    #     }],
+    #     enteringDict={})
 
 @app.route('/provision', methods = ['POST'])
 def deploy_ec2():
-	print(request.json)
+    start = time()
+    print(request.json)
 
-	# TODO TODO TODO : New container
-	client = docker.from_env()
-	container = client.containers.run("bfirsh/reticulate-splines", detach=True)
-	print(container.id)
-	print(output)
+    # Limit the number of running instances
+    if len(client.containers.list()) >= MAX_ALLOWED_INSTANCES:
+        return {'error': 'Max number of allowed instances reached.'}
 
-	return {'url': request.json['url'], 'camera_id': request.json['camera_id']}
+    # Create new container from image
+    output = check_output('docker run --env NVIDIA_DISABLE_REQUIRE=1 --gpus all -t -d cctv-cuda')
+    print('DEBUG: ', client.containers.list())
+    '''
+    container = client.containers.run("bfirsh/reticulate-splines", detach=True)
+    print(container.id)
+    '''
+
+    end = time()
+    print(f'Time needed for provisioning: {end - start} s')
+    # return {'url': request.json['url'], 'camera_id': request.json['camera_id']}
 
 @app.route('/unprovision', methods = ['POST'])
 def terminate_ec2():
-	print(request.json)
+    start = time()
+    print(request.json)
 
-	# TODO TODO TODO : New container
-	client = docker.from_env()
-	container = client.containers.run("bfirsh/reticulate-splines", detach=True)
-	print(container.id)
-	print(output)
+    # Delete the provisioned container
 
-	return {'camera_id': request.json['camera_id']}
+    end = time()
+    print(f'Time needed for unprovisioning: {end - start} s')
+
+    return {'camera_id': request.json['camera_id']}
 
 @app.route('/login', methods = ['POST'])
 def login():
-	record = tableUsers.get_item(Key={'userid': request.form['username']})
-	print(record)
-	if 'Item' in record:
-		if record['Item']['hash'].value == sha512(bytes(request.form['hash'], encoding='utf-8') + record['Item']['salt'].value).digest():
-			sessionid = 'blahblahblah'
-			print('=== Success ===')
-		else:
-			sessionid = False
-	else:
-		sessionid = False
-	return {'sessionid': sessionid}
+    record = tableUsers.get_item(Key={'userid': request.form['username']})
+    print(record)
+    if 'Item' in record:
+        if record['Item']['hash'].value == sha512(bytes(request.form['hash'], encoding='utf-8') + record['Item']['salt'].value).digest():
+            sessionid = 'blahblahblah'
+            print('=== Success ===')
+        else:
+            sessionid = False
+    else:
+        sessionid = False
+    return {'sessionid': sessionid}
 
 @app.route('/register', methods = ['POST'])
 def register():
-	record = tableUsers.get_item(Key={'userid': request.form['username']})
-	print(record)
-	if 'Item' in record:
-		return 'taken'
-	else:
-		salt = urandom(16)
-		print(salt)
+    record = tableUsers.get_item(Key={'userid': request.form['username']})
+    print(record)
+    if 'Item' in record:
+        return 'taken'
+    else:
+        salt = urandom(16)
+        print(salt)
 
-		hash = sha512(bytes(request.form['hash'], encoding='utf-8') + salt).digest()
-		print({'userid': request.form['username'], 'salt': salt, 'hash': hash})
+        hash = sha512(bytes(request.form['hash'], encoding='utf-8') + salt).digest()
+        print({'userid': request.form['username'], 'salt': salt, 'hash': hash})
 
-		tableUsers.put_item(Item={'userid': request.form['username'], 'salt': salt, 'hash': hash})
-		
-		sessionid = 'blahblahblah'
-		return {'sessionid': sessionid}
+        tableUsers.put_item(Item={'userid': request.form['username'], 'salt': salt, 'hash': hash})
+        
+        sessionid = 'blahblahblah'
+        return {'sessionid': sessionid}
 
 @app.route('/getFileList', methods = ['POST'])
 def getFileList():
-	request.form['session']
-	return
+    request.form['session']
+    return
 
 @app.route('/getFile', methods = ['POST'])
 def getFile():
-	# Location
-	'segmentids'
-	# Assemble!
-	request.form['session']
-	request.form['fileId']
-	return
+    # Location
+    'segmentids'
+    # Assemble!
+    request.form['session']
+    request.form['fileId']
+    return
 
 @app.route('/upload', methods = ['POST'])
 def upload():
-	# Just split file into chunks
-	tableDedupSequence.put_item(Item={'userid': '35', 'sequence': 'microsoft'})
+    # Just split file into chunks
+    tableDedupSequence.put_item(Item={'userid': '35', 'sequence': 'microsoft'})
 
 @app.route('/logout', methods = ['POST'])
 def logout():
-	request.form['session']
-	return
+    request.form['session']
+    return
 
 async def echo(websocket):
     async for message in websocket:
-        await websocket.send(f'Received: {message}')
+        print('Received') # print(f'Received: {message}')
+        # print(ploads(message))
+        loaded = ploads(message)
+        g_payload[loaded['fn']] = loaded
+        try:
+            await websocket.send('Received') #websocket.send(f'Received: {message}')
+        except:
+            pass
 
 async def main():
-    async with websockets.serve(echo, "localhost", 8765):
+    async with websockets.serve(echo, "0.0.0.0", 8765, max_size=99999999):
         await asyncio.Future()  # run forever
 
 def between_callback():

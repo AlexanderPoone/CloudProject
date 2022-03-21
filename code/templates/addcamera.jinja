@@ -43,7 +43,7 @@
         }
     </style>
     <title>Cloud Computing Deep Learning Dashboard</title>
-    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <link rel="shortcut icon" href="static/favicon.ico">
 </head>
 <body>
     <div id="infoPanel">
@@ -109,7 +109,6 @@ document.querySelector('#app &gt; div &gt; main &gt; div &gt; div &gt; div.row.m
             <h5 class="card-header"><i class="fad fa-signal-stream fa-lg fa-fw"></i>&nbsp;&nbsp;<span data-i18n="live">Live Traffic</span><br>(processed by DeepSORT-ResNet101)</h5>
             <div class="card-body">
                 <p>Click on one of the URLs above to see live footage.</p>
-                <p dir="auto">Since the Transport Department overhauled their page and added security features, the code has been outdated. A workaround is being made.</p>
                 <div id="live1frame">
                     <img src="static/live.gif" width="100px" style="margin: 30px; position: absolute;">
                     <canvas id="match1_" class="overlays overlay5" width="960" height="540"></canvas>
@@ -136,16 +135,16 @@ document.querySelector('#app &gt; div &gt; main &gt; div &gt; div &gt; div.row.m
                                 title="Concrete mixers"></th>
                     </tr>
                     <tr id="entering">
-                        <th>Count</th>
-                        <td>{{ enteringDict['ambulance'] }}</td>
-                        <td>{{ enteringDict['automobile'] }}</td>
-                        <td>{{ enteringDict['bus'] }}</td>
-                        <td>{{ enteringDict['truck'] }}</td>
-                        <td>{{ enteringDict['minibus'] }}</td>
-                        <td>{{ enteringDict['motorcycle'] }}</td>
-                        <td>{{ enteringDict['shuttlebus'] }}</td>
-                        <td>{{ enteringDict['taxi'] }}</td>
-                        <td>{{ enteringDict['concretemixer'] }}</td>
+                        <th>Real-time Vehicle Count</th>
+                        <td class="cnts">Waiting</td>
+                        <td class="cnts">Waiting</td>
+                        <td class="cnts">Waiting</td>
+                        <td class="cnts">Waiting</td>
+                        <td class="cnts">Waiting</td>
+                        <td class="cnts">Waiting</td>
+                        <td class="cnts">Waiting</td>
+                        <td class="cnts">Waiting</td>
+                        <td class="cnts">Waiting</td>
                     </tr>
                 </table>
             </div>
@@ -189,5 +188,13 @@ document.querySelector('#app &gt; div &gt; main &gt; div &gt; div &gt; div.row.m
             });
         });
     </script>
+    {% for i in data: %}
+    <script>
+        $('#live1')[0].src = "{{ i['img'] }}";
+        {% for j in i['cnt']: %}
+            $('.cnts').eq({{loop.index0}}).text({{j}});
+        {% endfor %}
+    </script>
+    {% endfor %}
 </body>
 </html>
