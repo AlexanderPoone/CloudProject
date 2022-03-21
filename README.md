@@ -68,6 +68,7 @@ aws configure
 ## Requirements
 To install the dependencies, enter the following in the command line:
 ```
+cd code
 pip3 install -r requirements.txt
 ```
 
