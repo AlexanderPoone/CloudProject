@@ -198,6 +198,14 @@ document.querySelector('#app &gt; div &gt; main &gt; div &gt; div &gt; div.row.m
         let camClickCallback = function(evt){
             $('.camera_instance').css('background', 'transparent');
             $(evt.target).css('background', 'yellow');
+            fetch('/switchCamera' {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({camera_id: $(evt.target).parent().next().text()})
+            });
+            //TODO TODO TODO TODO
         };
         $('.camera_instance').click(camClickCallback);
     </script>

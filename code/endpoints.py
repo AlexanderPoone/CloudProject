@@ -87,7 +87,7 @@ def dashboard():
 
 @app.route('/switchCamera', methods = ['POST'])
 def switchCamera():
-    g_selected_camera = request.json['camid']
+    g_selected_camera = request.json['camera_id']
     return
 
 @app.route('/provision', methods = ['POST'])
@@ -98,7 +98,7 @@ def deploy_ec2():
     print(request.json)
 
     # Limit the number of running instances
-    if len(client.containers()) >= MAX_ALLOWED_INSTANCES:
+    if len(client.containers) >= MAX_ALLOWED_INSTANCES:
         return {'error': 'Max number of allowed instances reached.'}
 
     # Create new container from image
