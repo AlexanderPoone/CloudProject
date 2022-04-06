@@ -154,10 +154,14 @@ document.querySelector('#app &gt; div &gt; main &gt; div &gt; div &gt; div.row.m
 
     <script type="text/javascript">
         $('#camera_add').click(function() {
-            let m3u8_stream = $('#m3u8_stream').val();
-            let camera_id = $('#camera_id').val();
-            if (m3u8_stream.trim() === '' || camera_id.trim() === '') {
+            let m3u8_stream = $('#m3u8_stream').val().trim();
+            let camera_id = $('#camera_id').val().trim();
+            if (m3u8_stream === '' || camera_id === '') {
                 alert('Please fill in the CCTV details!');
+                return;
+            }
+            if (!m3u8_stream.startsWith('https://')) {
+                alert('Stream URL must start with https:// !');
                 return;
             }
             $(`<tr><td><a href="#" class="camera_instance">${m3u8_stream}</a></td><td>${camera_id}</td><td><strong style="color: slategray;"><i class="fad fa-spinner fa-pulse"></i> Creating</strong></td><td></td></tr>`).insertAfter($('#urlFirstRow'));
