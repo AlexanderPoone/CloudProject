@@ -55,8 +55,8 @@ def dashboard():
         global g_payload
 
         while True:
-            print('Hi')
-            sleep(1)
+            # print('Hi')
+            sleep(0.5)
             if len(g_payload) == 0:
                 yield None
             elif g_selected_camera is None:
@@ -87,25 +87,26 @@ def dashboard():
 
 @app.route('/switchCamera', methods = ['POST'])
 def switchCamera():
-	g_selected_camera = request.json['camid']
-	return
+    g_selected_camera = request.json['camid']
+    return
 
 @app.route('/provision', methods = ['POST'])
 def deploy_ec2():
+    url = 'testsuite/unknown_02.mp4' # Dummy for testing
+
     start = time()
     print(request.json)
 
     # Limit the number of running instances
-    if len(client.containers.list()) >= MAX_ALLOWED_INSTANCES:
+    if len(client.containers()) >= MAX_ALLOWED_INSTANCES:
         return {'error': 'Max number of allowed instances reached.'}
 
     # Create new container from image
     output = check_output('docker run --env NVIDIA_DISABLE_REQUIRE=1 --gpus all -t -d cctv-cuda')
-    print('DEBUG: ', client.containers.list())
+    print('DEBUG: ', client.containers())
 
     # Must use BASH instead of SH
-    exe = client.exec_create(container=my_container, 
-                             cmd=['/bin/bash', '-c' 'touch /somefile'])
+    exe = client.exec_create(container=client.containers()[0], cmd=['/bin/bash', '-c', f'/root/anaconda3/bin/conda run -n my-env python demo/demo_mot_vis.py configs/mot/tracktor/my2.py --input "{url}" --output "/tbd" --fps 5'])
     res = client.exec_start(exec_id=exe)
 
     '''

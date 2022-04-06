@@ -86,7 +86,7 @@ document.querySelector('#app &gt; div &gt; main &gt; div &gt; div &gt; div.row.m
                     </tr>
                   {% for ec2 in activeEc2 %}
                     <tr>
-                      <td><a href="#">{{ ec2.url }}</a></td>
+                      <td><a href="#" class="camera_instance">{{ ec2.url }}</a></td>
                       <td>{{ ec2.camera_id }}</td>
                       <td>
                       {% if ec2.status == 0 %}
@@ -160,7 +160,10 @@ document.querySelector('#app &gt; div &gt; main &gt; div &gt; div &gt; div.row.m
                 alert('Please fill in the CCTV details!');
                 return;
             }
-            $(`<tr><td>${m3u8_stream}</td><td>${camera_id}</td><td><strong style="color: slategray;"><i class="fad fa-spinner fa-pulse"></i> Creating</strong></td><td></td></tr>`).insertAfter($('#urlFirstRow'));
+            $(`<tr><td><a href="#" class="camera_instance">${m3u8_stream}</a></td><td>${camera_id}</td><td><strong style="color: slategray;"><i class="fad fa-spinner fa-pulse"></i> Creating</strong></td><td></td></tr>`).insertAfter($('#urlFirstRow'));
+            $('.camera_instance').off('click');
+            $('.camera_instance').click(camClickCallback);
+
             fetch(`/provision`, {
                 method: 'POST',
                 headers: {
@@ -187,6 +190,12 @@ document.querySelector('#app &gt; div &gt; main &gt; div &gt; div &gt; div.row.m
                 console.log(res);
             });
         });
+
+        let camClickCallback = function(evt){
+            $('.camera_instance').css('background', 'transparent');
+            $(evt.target).css('background', 'yellow');
+        };
+        $('.camera_instance').click(camClickCallback);
     </script>
     {% for i in data: %}
     <script>
