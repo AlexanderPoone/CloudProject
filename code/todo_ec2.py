@@ -36,7 +36,7 @@ def connect(publicIp, instanceNumber, retries=5, master_ip=None):
             # Assumed that the Web Server has AWS CLI Tool installed and configured properly
             # Get the account secrets using the AWS CLI (for security purposes obviously)
             aws_access_key_id = check_output('aws configure get aws_access_key_id').decode('utf-8').rstrip()
-            aws_secret_access_key = check_output('aws configure get aws_access_key_id').decode('utf-8').rstrip()
+            aws_secret_access_key = check_output('aws configure get aws_secret_access_key').decode('utf-8').rstrip()
 
             # Log in to ECR
             stdin, stdout, stderr = client.exec_command(f'aws configure set aws_access_key_id {aws_access_key_id};aws configure set aws_secret_access_key {aws_secret_access_key};aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/o1i0p5x6')
