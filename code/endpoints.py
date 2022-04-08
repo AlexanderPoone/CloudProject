@@ -24,8 +24,8 @@ from pickle import loads as ploads
 app = Flask(__name__)
 CORS(app)
 
-s = boto3.Session(region_name='us-east-1')
-client = s.resource('dynamodb')
+s = boto3.Session(region_name='us-apeast-1')
+dynamo_client = s.resource('dynamodb')
 
 tableUsers = client.Table("users")
 print(tableUsers.table_status)
@@ -34,7 +34,7 @@ print(tableDedupSequence.table_status)
 
 # Do we need to store worker IP address in database?
 MAX_ALLOWED_INSTANCES = 2
-client = docker.from_env()
+client = docker.APIClient()    # client = docker.from_env()
 
 g_payload = {}
 g_selected_camera = None
@@ -98,7 +98,7 @@ def deploy_ec2():
     print(request.json)
 
     # Limit the number of running instances
-    if len(client.containers) >= MAX_ALLOWED_INSTANCES:
+    if len(client.containers()) >= MAX_ALLOWED_INSTANCES:
         return {'error': 'Max number of allowed instances reached.'}
 
     # Create new container from image
