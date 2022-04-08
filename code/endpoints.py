@@ -27,9 +27,9 @@ CORS(app)
 s = boto3.Session(region_name='us-apeast-1')
 dynamo_client = s.resource('dynamodb')
 
-tableUsers = client.Table("users")
+tableUsers = dynamo_client.Table("users")
 print(tableUsers.table_status)
-tableDedupSequence = client.Table("dedupSequence")
+tableDedupSequence = dynamo_client.Table("dedupSequence")
 print(tableDedupSequence.table_status)
 
 # Do we need to store worker IP address in database?
