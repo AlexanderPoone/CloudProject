@@ -1,5 +1,5 @@
 '''
-Cloud Computing Project Client REST API
+Cloud Computing Project Server REST API
 '''
 import boto3
 import botocore
@@ -24,17 +24,17 @@ from pickle import loads as ploads
 app = Flask(__name__)
 CORS(app)
 
-s = boto3.Session(region_name='us-apeast-1')
-dynamo_client = s.resource('dynamodb')
 
-tableUsers = dynamo_client.Table("users")
+s = boto3.Session(region_name='ap-east-1') # Hong Kong
+dynamo_client = s.resource('dynamodb')
+tableUsers = dynamo_client.Table("savedcameras")
 print(tableUsers.table_status)
-tableDedupSequence = dynamo_client.Table("dedupSequence")
-print(tableDedupSequence.table_status)
+
 
 # Do we need to store worker IP address in database?
 MAX_ALLOWED_INSTANCES = 2
 client = docker.APIClient()    # client = docker.from_env()
+
 
 g_payload = {}
 g_selected_camera = None
