@@ -48,7 +48,7 @@ def connect(publicIp, instanceNumber, cctvUrl, retries=5, master_ip=None):
             print(f'Time needed to set up a GPU Instance: {time() - tm} s')
 
             # Start deep learning by issueing command to the container
-            stdin, stdout, stderr = client.exec_command(f'docker run --gpus=all --runtime=nvidia public.ecr.aws/o1i0p5x6/new bash -c "apt-get update;apt-get install -y libnvidia-ml-dev;/root/anaconda3/bin/conda run -n my-env python demo/demo_mot_vis.py configs/mot/tracktor/my2.py --input {cctvUrl} --output "/tbd" --fps 5"')    #testsuite/unknown_02.mp4
+            stdin, stdout, stderr = client.exec_command(f'docker run --gpus=all --runtime=nvidia public.ecr.aws/o1i0p5x6/new bash -c "apt-get update;apt-get install -y libnvidia-ml-dev;/root/anaconda3/bin/conda run -n my-env python demo/demo_mot_vis.py configs/mot/tracktor/my2.py --input {cctvUrl} --output /tbd --fps 5"')    #testsuite/unknown_02.mp4
             print(stderr.read())
         else:
             stdin, stdout, stderr = client.exec_command(f'ping -c 4 {master_ip}')
