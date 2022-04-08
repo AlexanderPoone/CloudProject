@@ -12,7 +12,12 @@ from os.path import expanduser
 from time import time, sleep
 from subprocess import check_output
 
-##############################################################################
+
+NUM_WORKERS = 1
+KEY_PAIR = 'hk'
+REGION_NAME = 'ap-east-1'
+DEEP_LEARNING_AMAZON_LINUX = 'ami-0d13c25a429da989d'
+
 
 tm = time()
 # The RSA key is already stored on the Web Server beforehand
@@ -22,6 +27,7 @@ client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
 
 # Connect to EC2 Instance
 def connect(publicIp, instanceNumber, retries=5, master_ip=None):
+    global tm
     try:
         client.connect(hostname=publicIp, username="ec2-user", pkey=key, timeout=120)
 
@@ -40,15 +46,14 @@ def connect(publicIp, instanceNumber, retries=5, master_ip=None):
             stdin, stdout, stderr = client.exec_command('docker pull public.ecr.aws/o1i0p5x6/new:latest')
             print(stderr.read())
 
+            print(f'Time needed to set up a GPU Instance: {time() - tm} s')
+
             # Start deep learning by issueing command to the container
             stdin, stdout, stderr = client.exec_command('docker run --gpus=all --runtime=nvidia public.ecr.aws/o1i0p5x6/new bash -c "apt-get update;apt-get install -y libnvidia-ml-dev;/root/anaconda3/bin/conda run -n my-env python demo/demo_mot_vis.py configs/mot/tracktor/my2.py --input https://s81.ipcamlive.com/streams/514uqhm5v8lc0z9fj/stream.m3u8 --output "/tbd" --fps 5"')    #testsuite/unknown_02.mp4
             print(stderr.read())
         else:
             stdin, stdout, stderr = client.exec_command(f'ping -c 4 {master_ip}')
-        print(stdout.read())
 
-        stdin, stdout, stderr = client.exec_command(f'jps')
-        print(stdout.read())
         print('------------------------------------------------------------')
 
 
@@ -61,7 +66,7 @@ def connect(publicIp, instanceNumber, retries=5, master_ip=None):
 
 
 
-        #   Close the client connection once the job is done
+        #  Close the client connection once the job is done
         client.close()
     except Exception as e:
         print(f'{e}; Retrying...')
@@ -69,16 +74,14 @@ def connect(publicIp, instanceNumber, retries=5, master_ip=None):
             retries -= 1
             connect(publicIp, instanceNumber, retries, master_ip)
 
-NUM_WORKERS = 1
-KEY_PAIR = 'hk'
 
 s = boto3.Session(
-    region_name='ap-east-1')
+    region_name=REGION_NAME)
 ec2 = s.resource('ec2')
 
 ##############################################################################
 
-m = ec2.create_instances(ImageId='ami-0d13c25a429da989d',
+m = ec2.create_instances(ImageId=DEEP_LEARNING_AMAZON_LINUX,
     InstanceType='g4dn.xlarge',
     SecurityGroups=['launch-wizard-1'],
     MaxCount=1,
