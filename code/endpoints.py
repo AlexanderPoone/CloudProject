@@ -21,6 +21,8 @@ import asyncio
 import websockets
 from pickle import loads as ploads
 
+from ec2_utils import createG4Instance
+
 app = Flask(__name__)
 CORS(app)
 
@@ -90,40 +92,45 @@ def switchCamera():
     g_selected_camera = request.json['camera_id']
     return
 
+
+PRODUCTION = True                      # Use Amazon GPU Instances or Test Locally?
+
 @app.route('/provision', methods = ['POST'])
 def deploy_ec2():
-    url = 'testsuite/unknown_02.mp4' # Dummy for testing
-
-    start = time()
     print(request.json)
+    
+    url = request.json['url']			# 'testsuite/unknown_02.mp4'
+    start = time()
 
-    # Limit the number of running instances
-    if len(client.containers()) >= MAX_ALLOWED_INSTANCES:
-        return {'error': 'Max number of allowed instances reached.'}
+    if PRODUCTION:						# Use Amazon GPU Instances
+    	createG4Instance(url)
+    else:								# Test Locally
+	    # Limit the number of running instances
+	    if len(client.containers()) >= MAX_ALLOWED_INSTANCES:
+	        return {'error': 'Max number of allowed instances reached.'}
 
-    # Create new container from image
-    output = check_output('docker run --env NVIDIA_DISABLE_REQUIRE=1 --gpus all -t -d cctv-cuda')
-    print('DEBUG: ', client.containers())
+	    # Create new container from image
+	    output = check_output('docker run --env NVIDIA_DISABLE_REQUIRE=1 --gpus all -t -d cctv-cuda')
+	    print('DEBUG: ', client.containers())
 
-    # Must use BASH instead of SH
-    exe = client.exec_create(container=client.containers()[0], cmd=['/bin/bash', '-c', f'/root/anaconda3/bin/conda run -n my-env python demo/demo_mot_vis.py configs/mot/tracktor/my2.py --input "{url}" --output "/tbd" --fps 5'])
-    res = client.exec_start(exec_id=exe)
-
-    '''
-    container = client.containers.run("bfirsh/reticulate-splines", detach=True)
-    print(container.id)
-    '''
+	    # Must use BASH instead of SH
+	    exe = client.exec_create(container=client.containers()[0], cmd=['/bin/bash', '-c', f'/root/anaconda3/bin/conda run -n my-env python demo/demo_mot_vis.py configs/mot/tracktor/my2.py --input "{url}" --output "/tbd" --fps 5'])
+	    res = client.exec_start(exec_id=exe)
 
     end = time()
     print(f'Time needed for provisioning: {end - start} s')
-    # return {'url': request.json['url'], 'camera_id': request.json['camera_id']}
+    return {'url': url, 'camera_id': request.json['camera_id']}
 
 @app.route('/unprovision', methods = ['POST'])
 def terminate_ec2():
-    start = time()
     print(request.json)
+    start = time()
 
-    # Delete the provisioned container
+    if PRODUCTION:						# Use Amazon GPU Instances
+    	pass
+    else:
+    	pass
+    	# Delete the provisioned container
 
     end = time()
     print(f'Time needed for unprovisioning: {end - start} s')

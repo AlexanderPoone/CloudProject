@@ -1,8 +1,5 @@
 '''
-Cloud Computing Project Web Server
-
-EC2 ImageIds:
-* ami-0d13c25a429da989d   Deep Learning Base Image (Amazon Linux)
+Cloud Computing Project Flask Web Server
 '''
 
 import boto3
@@ -15,6 +12,13 @@ from subprocess import check_output
 NUM_WORKERS = 1
 KEY_PAIR = 'hk'
 REGION_NAME = 'ap-east-1'
+'''
+Amazon Linux
+64-bit (x86)
+Deep Learning Base AMI (Amazon Linux 2) Version 52.0 - ami-0d13c25a429da989d
+Built with NVIDIA CUDA, cuDNN, NCCL, GPU Drivers, Intel MKL-DNN, Docker, NVIDIA-Docker and EFA support. For a fully managed experience, check: https://aws.amazon.com/sagemaker
+Root device type: ebs Virtualization type: hvm ENA Enabled: Yes
+'''
 DEEP_LEARNING_AMAZON_LINUX = 'ami-0d13c25a429da989d'
 
 
@@ -73,7 +77,7 @@ def connect(publicIp, instanceNumber, cctvUrl, retries=5, master_ip=None):
             retries -= 1
             connect(publicIp, instanceNumber, cctvUrl, retries, master_ip)
 
-def createG4Instance(cctvUrl='https://s81.ipcamlive.com/streams/514uqhm5v8lc0z9fj/stream.m3u8')
+def createG4Instance(cctvUrl='https://s81.ipcamlive.com/streams/514uqhm5v8lc0z9fj/stream.m3u8'):
     s = boto3.Session(
         region_name=REGION_NAME)
     ec2 = s.resource('ec2')
