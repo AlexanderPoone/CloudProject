@@ -1,5 +1,4 @@
 # Cloud Computing Project
-**DRAFT**
 
 ## Scalable and Compatible Real-time IoT Graphics Deep Learning for Traffic Analysis using Cloud Computing 
 **Group 8**
@@ -17,11 +16,14 @@
 Future site: [https://dord.mynetgear.com:18888](https://dord.mynetgear.com:18888)
 
 ## Project Website
-* [Docker Container](https://dord.mynetgear.com:14443/container.tar) (~21 GB), the Docker container should be attached to a cloud compute instance, see the requirements below.
+* [Docker Container](https://dord.mynetgear.com:14443/container.tar) (this is the uncompressed version: ~21 GB; version on ECR is compressed: ~12 GB), the Docker container should be attached to a cloud compute instance, see the requirements below.
 
 `conda run -n my-env python demo/demo_mot_vis.py configs/mot/tracktor/my2.py --input "testsuite/unknown_02.mp4" --output "/tbd" --fps 5`
 
 * GitHub: [https://github.com/SoftFeta/CloudProject](https://github.com/SoftFeta/CloudProject)
+
+## Summary of our System's Pipeline
+![traffic_analysis_pipeline.png](traffic_analysis_pipeline.png)
 
 ## Objectives
 We are doing a **research topic**.
@@ -51,7 +53,7 @@ Note that the design is subject to change. The subscriber model is implemented u
 
 An advantage of using cloud computing for deep learning is, if we have multiple deep learning models, we can harness multiple EC2 instances to perform model blending or model stacking, improving the accuracy of the object tracking, without loss of computing performance. 
 
-![project_pipeline.png](project_pipeline.png)
+![traffic_analysis_architecture_diagram.png](traffic_analysis_architecture_diagram.png)
 
 ## Technologies used
 We will implement everything in basic Python, HTML and JavaScript. We can programmatically create EC2 instances using the **Boto3** library, which is the official Python client for everything AWS, made by Amazon themselves. Commands can be issued programmatically using the **paramiko** library, which is basically a SSH (Secure Shell) wrapper.
@@ -73,4 +75,10 @@ pip3 install -r requirements.txt
 ```
 
 ## Bibliography
-[1] Liu, K., & Boehm, J. (2015). *Classification of Big Point Cloud Data Using Cloud Computing*. ISPRS-International Archives of the Photogrammetry, Remote Sensing and Spatial Information Sciences 40, 553-557. Retrieved February 24, 2022, from https://discovery.ucl.ac.uk/id/eprint/1471584/1/isprsarchives-XL-3-W3-553-2015.pdf
+[1] Liu, K., & Boehm, J. (2015). *Classification of Big Point Cloud Data Using Cloud Computing*. ISPRS-International Archives of the Photogrammetry, Remote Sensing and Spatial Information Sciences 40, 553-557. Retrieved February 24, 2022, from https://discovery.ucl.ac.uk/id/eprint/1471584/1/isprsarchives-XL-3-W3-553-2015.pdf 
+
+[2] Bergmann, P., Meinhardt, T., & Leal-Taixe, L. (2019, August 17). *Tracking without bells and whistles*. arXiv.org. Retrieved February 24, 2022, from https://arxiv.org/abs/1903.05625 
+
+[3] Luckow, A., Cook, M., Ashcraft, N., & Weill, E. (2016, December). *Deep Learning in the Automotive Industry: Applications and Tools*. Retrieved February 24, 2022, from https://www.researchgate.net/profile/Andre-Luckow/publication/313458531_Deep_Learning_in_the_Automotive_Industry_Applications_and_Tools/links/5a6e84c3458515d407585438/Deep-Learning-in-the-Automotive-Industry-Applications-and-Tools.pdf 
+
+[4] Eva Maia Malta University of Campinas, Malta, E. M., Campinas, U. of, Campinas, S. A. U. of, Avila, S., Campinas, E. B. U. of, Borin, E., Technology, A. U. of, Sciences, Z. U. of A., Cesnet, Derby, U. of, & Metrics, O. M. V. A. (2019, December 1). *Exploring the cost-benefit of AWS EC2 GPU instances for Deep Learning Applications: Proceedings of the 12th IEEE/ACM International Conference on Utility and Cloud Computing*. ACM Conferences. Retrieved February 26, 2022, from https://dl.acm.org/doi/abs/10.1145/3344341.3368814 
