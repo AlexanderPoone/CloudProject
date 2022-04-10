@@ -48,7 +48,7 @@
 <body>
     <div id="infoPanel">
         <div class="card">
-            <h5 class="card-header"><i class="fad fa-cctv fa-lg fa-fw"></i>&nbsp;&nbsp;<span data-i18n="live">Camera Dashboard</span></h5>
+            <h5 class="card-header"><i class="fad fa-cctv fa-lg fa-fw"></i>&nbsp;&nbsp;<span>Camera Dashboard</span></h5>
             <div class="card-body">
                 The m3u8 format is standard for video streaming. For example, in the sites listed below, we can get the URLs by Chrome F12 > Network tab > Search 'm3u8':
                 <ul>
@@ -106,7 +106,7 @@ document.querySelector('#app &gt; div &gt; main &gt; div &gt; div &gt; div.row.m
         </div>
         <br>
         <div class="card">
-            <h5 class="card-header"><i class="fad fa-signal-stream fa-lg fa-fw"></i>&nbsp;&nbsp;<span data-i18n="live">Live Traffic</span><br>(processed by Tracktor-ResNet101)</h5>
+            <h5 class="card-header"><i class="fad fa-signal-stream fa-lg fa-fw"></i>&nbsp;&nbsp;<span>Live Traffic</span><br>(processed by Tracktor-ResNet101)</h5>
             <div class="card-body">
                 <p>Click on one of the URLs above to see live footage.</p>
                 <div id="live1frame">
@@ -147,6 +147,30 @@ document.querySelector('#app &gt; div &gt; main &gt; div &gt; div &gt; div.row.m
                         <td class="cnts">Waiting</td>
                     </tr>
                 </table>
+                <br>
+                <p><strong>Spotted a detection error?</strong> <a href="#staticBackdrop" data-bs-toggle="modal"
+                        data-bs-target="#staticBackdrop">Report here!</a> </p>
+                <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
+                    tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-xl">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="staticBackdropLabel"><i class="fad fa-exclamation-square fa-lg fa-fw"></i>&nbsp;&nbsp;<span>Report a detection error</span></h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <p>To report a detection error, draw a new bounding box on top of the incorrect one, then select the correct category from the drop down.</p>
+                            <p>Your feedback will be automatically converted into training samples for improving our AI system.</p>
+                                <iframe src="static/bbox-annotator/demo.html" style="width: 100%; height:644px;"></iframe>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                <button id="btnSubmitCorrection" type="button" data-bs-dismiss="modal" class="btn btn-success" onclick="alert('Success')">Submit</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
