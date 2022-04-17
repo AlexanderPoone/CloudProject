@@ -35,7 +35,7 @@ print(tableUsers.table_status)
 
 # Do we need to store worker IP address in database?
 MAX_ALLOWED_INSTANCES = 2
-client = docker.APIClient()    # client = docker.from_env()
+# client = docker.APIClient()    # client = docker.from_env()
 
 
 g_payload = {}
@@ -136,62 +136,6 @@ def terminate_ec2():
     print(f'Time needed for unprovisioning: {end - start} s')
 
     return {'camera_id': request.json['camera_id']}
-
-@app.route('/login', methods = ['POST'])
-def login():
-    record = tableUsers.get_item(Key={'userid': request.form['username']})
-    print(record)
-    if 'Item' in record:
-        if record['Item']['hash'].value == sha512(bytes(request.form['hash'], encoding='utf-8') + record['Item']['salt'].value).digest():
-            sessionid = 'blahblahblah'
-            print('=== Success ===')
-        else:
-            sessionid = False
-    else:
-        sessionid = False
-    return {'sessionid': sessionid}
-
-@app.route('/register', methods = ['POST'])
-def register():
-    record = tableUsers.get_item(Key={'userid': request.form['username']})
-    print(record)
-    if 'Item' in record:
-        return 'taken'
-    else:
-        salt = urandom(16)
-        print(salt)
-
-        hash = sha512(bytes(request.form['hash'], encoding='utf-8') + salt).digest()
-        print({'userid': request.form['username'], 'salt': salt, 'hash': hash})
-
-        tableUsers.put_item(Item={'userid': request.form['username'], 'salt': salt, 'hash': hash})
-        
-        sessionid = 'blahblahblah'
-        return {'sessionid': sessionid}
-
-@app.route('/getFileList', methods = ['POST'])
-def getFileList():
-    request.form['session']
-    return
-
-@app.route('/getFile', methods = ['POST'])
-def getFile():
-    # Location
-    'segmentids'
-    # Assemble!
-    request.form['session']
-    request.form['fileId']
-    return
-
-@app.route('/upload', methods = ['POST'])
-def upload():
-    # Just split file into chunks
-    tableDedupSequence.put_item(Item={'userid': '35', 'sequence': 'microsoft'})
-
-@app.route('/logout', methods = ['POST'])
-def logout():
-    request.form['session']
-    return
 
 async def echo(websocket):
     async for message in websocket:
