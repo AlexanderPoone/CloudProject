@@ -19,12 +19,16 @@ from subprocess import Popen, call, run, check_output, CREATE_NO_WINDOW, DEVNULL
 
 import asyncio
 import websockets
+import socket
+from flask_socketio import SocketIO, emit
+
 from pickle import loads as ploads
 
 from ec2_utils import createG4Instance
 
 app = Flask(__name__)
 CORS(app)
+sio = SocketIO(app)
 
 
 s = boto3.Session(region_name='ap-east-1') # Hong Kong
@@ -52,6 +56,7 @@ def stream_template(template_name, **context):
 
 @app.route('/', methods = ['GET'])
 def dashboard():
+    '''
     def forward_g_payload():
         global g_selected_camera
         global g_payload
@@ -78,14 +83,15 @@ def dashboard():
         }],
         enteringDict={}
     ))
+    '''
 
-    # return render_template('addcamera.jinja',
-    #     activeEc2=[{
-    #         'url': 'https://s20.ipcamlive.com/streams/14ubd8f7onwbk5ozv/stream.m3u8',
-    #         'camera_id': 'kai_tak_road',
-    #         'status': 1
-    #     }],
-    #     enteringDict={})
+    return render_template('addcamera.jinja',
+        activeEc2=[{
+            'url': 'https://s20.ipcamlive.com/streams/14ubd8f7onwbk5ozv/stream.m3u8',
+            'camera_id': 'kai_tak_road',
+            'status': 1
+        }],
+        enteringDict={})
 
 @app.route('/switchCamera', methods = ['POST'])
 def switchCamera():
@@ -137,6 +143,7 @@ def terminate_ec2():
 
     return {'camera_id': request.json['camera_id']}
 
+'''
 async def echo(websocket):
     async for message in websocket:
         print('Received') # print(f'Received: {message}')
@@ -158,8 +165,30 @@ def between_callback():
 
     loop.run_until_complete(main())
     loop.close()
+'''
+
+#for handle client connect event
+@sio.on('connect')
+def handle_connect_event():
+    print("connected")
+
+
+def receive_deep_learning_result():
+    RECV_BYTE_SIZE = 4096
+    udp_sock = socket(socket.AF_INET, socket.SOCK_DGRAM)
+    udp_sock.bind('0.0.0.0', 8765)
+    while True:
+        recv_data, recv_addr = udp_sock.recvfrom(RECV_BYTE_SIZE)
+        print(recv_addr)
+        loaded = ploads(recv_data)
+        g_payload[loaded['fn']] = loaded
+        #emit result to client
+        sio.emit(g_payload[g_selected_camera])
+        
 
 if __name__ == "__main__":
-    x = threading.Thread(target=between_callback)
-    x.start()
-    app.run(host='0.0.0.0', ssl_context=('cert.pem', 'privkey.pem'), port=18888)
+    #x = threading.Thread(target=between_callback)
+    #x.start()
+    recv_th = threading.Thread(target=receive_deep_learning_result)
+    recv_th.start()
+    sio.run(app, host='0.0.0.0', ssl_context=('cert.pem', 'privkey.pem'), port=18888)
