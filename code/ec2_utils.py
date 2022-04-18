@@ -42,16 +42,23 @@ def connect(publicIp, instanceNumber, cctvUrl, retries=5, master_ip=None):
             aws_secret_access_key = check_output('aws configure get aws_secret_access_key').decode('utf-8').rstrip()
 
             # Log in to ECR
-            stdin, stdout, stderr = client.exec_command(f'aws configure set aws_access_key_id {aws_access_key_id};aws configure set aws_secret_access_key {aws_secret_access_key};aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/o1i0p5x6')
+            print('Setting up')
+            stdin, stdout, stderr = client.exec_command(f'aws configure set aws_access_key_id {aws_access_key_id}')
+            print(stderr.read())
+            
+            print('Log in to ECR')
+            stdin, stdout, stderr = client.exec_command(f'aws configure set aws_secret_access_key {aws_secret_access_key};aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/o1i0p5x6')
             print(stderr.read())
 
             # Pull Docker Image from ECR
+            print('Pull Docker Image from ECR')
             stdin, stdout, stderr = client.exec_command('docker pull public.ecr.aws/o1i0p5x6/new:latest')
             print(stderr.read())
 
             print(f'Time needed to set up a GPU Instance: {time() - tm} s')
 
             # Start deep learning by issueing command to the container
+            print('Start deep learning by issueing command to the container')
             stdin, stdout, stderr = client.exec_command(f'docker run --gpus=all --runtime=nvidia public.ecr.aws/o1i0p5x6/new bash -c "apt-get update;apt-get install -y libnvidia-ml-dev;/root/anaconda3/bin/conda run -n my-env python demo/demo_mot_vis.py configs/mot/tracktor/my2.py --input {cctvUrl} --output /tbd --fps 5"')    #testsuite/unknown_02.mp4
             print(stderr.read())
         else:
