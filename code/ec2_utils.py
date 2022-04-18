@@ -43,17 +43,12 @@ def connect(publicIp, instanceNumber, cctvUrl, retries=5, master_ip=None):
 
             # Log in to ECR
             print('Setting up')
-            stdin, stdout, stderr = client.exec_command(f'aws configure set aws_access_key_id {aws_access_key_id}')
-            print(stderr.read())
-            
-            print('Log in to ECR')
-            stdin, stdout, stderr = client.exec_command(f'aws configure set aws_secret_access_key {aws_secret_access_key};aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/o1i0p5x6')
+            stdin, stdout, stderr = client.exec_command(f'aws configure set aws_access_key_id {aws_access_key_id};aws configure set aws_secret_access_key {aws_secret_access_key};aws ecr get-login-password --region ap-east-1 | docker login --username AWS --password-stdin 085242460897.dkr.ecr.ap-east-1.amazonaws.com')
             print(stderr.read())
 
             # Pull Docker Image from ECR
             print('Pull Docker Image from ECR')
-            stdin, stdout, stderr = client.exec_command('docker pull public.ecr.aws/o1i0p5x6/new:latest')
-            print(stderr.read())
+            stdin, stdout, stderr = client.exec_command('docker pull 085242460897.dkr.ecr.ap-east-1.amazonaws.com/mot:latest')
 
             print(f'Time needed to set up a GPU Instance: {time() - tm} s')
 
