@@ -167,11 +167,21 @@ def between_callback():
     loop.close()
 '''
 
+is_start_streaming = False
+
 #for handle client connect event
 @sio.on('connect')
 def handle_connect_event():
+    global is_start_streaming
+    is_start_streaming = True
     print("connected")
     
+@sio.on('disconnect')
+def handle_disconnect_event():
+    global is_start_streaming
+    is_start_streaming = False
+    print("connected")
+
 @sio.on_error()
 def handle_error_event():
     print("error")
@@ -187,7 +197,8 @@ def receive_deep_learning_result():
         loaded = ploads(recv_data)
         g_payload[loaded['fn']] = loaded
         #emit result to client
-        sio.emit('data', g_payload[g_selected_camera])
+        if is_start_streaming == True:
+            sio.emit('video_data', g_payload[g_selected_camera])
         
 
 if __name__ == "__main__":
