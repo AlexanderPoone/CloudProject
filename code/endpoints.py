@@ -171,6 +171,10 @@ def between_callback():
 @sio.on('connect')
 def handle_connect_event():
     print("connected")
+    
+@sio.on_error()
+def handle_error_event():
+    print("error")
 
 
 def receive_deep_learning_result():
@@ -183,7 +187,7 @@ def receive_deep_learning_result():
         loaded = ploads(recv_data)
         g_payload[loaded['fn']] = loaded
         #emit result to client
-        sio.emit(g_payload[g_selected_camera])
+        sio.emit('data', g_payload[g_selected_camera])
         
 
 if __name__ == "__main__":
