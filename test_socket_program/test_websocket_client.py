@@ -15,4 +15,4 @@ async def hello(uri):
         f.close()
 
 asyncio.get_event_loop().run_until_complete(
-    hello('ws://ec2-54-227-64-84.compute-1.amazonaws.com:7000'))
+    hello('ws://ec2-34-203-214-59.compute-1.amazonaws.com:7000'))

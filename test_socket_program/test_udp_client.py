@@ -8,8 +8,6 @@ PORT = 7000
 BUFF_SIZE = 65000
 server_addr = (HOST, PORT)
 
-s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-
 f = open("test_data","rb")
 data = f.read(BUFF_SIZE)
 
@@ -22,6 +20,7 @@ while (data):
     data = f.read(BUFF_SIZE)
 
 start_time = time.time()
+s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 for x in data_list:
     s.sendto(x,server_addr)
 end_time = time.time()

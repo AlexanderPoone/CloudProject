@@ -12,9 +12,10 @@ s.listen(5)
 print('server start at: %s:%s' % (HOST, PORT))
 print('wait for connection...')
 
-while True:
-    conn, addr = s.accept()
-    data = conn.recv(1048576)
+conn, addr = s.accept()
+RecvData = conn.recv(65000)
+while RecvData:
     print('recvfrom ' + str(addr))
+    RecvData = conn.recv(65000)
     #conn.send('received'.encode())
-    conn.close()
+conn.close()
