@@ -3,7 +3,7 @@
 ## Scalable and Compatible Real-time IoT Graphics Deep Learning for Traffic Analysis using Cloud Computing 
 **Group 8**
 
-### Demo video: https://www.youtube.com/watch?v=Pn3P5l0gSSE
+### Demo video: https://www.youtube.com/watch?v=N4AwrDM_NQQ
 
 ## Group members
 56200477 Poon Bing-chun
