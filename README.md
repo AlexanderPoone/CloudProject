@@ -1,3 +1,5 @@
+(Since this project has received excellent reviews, I will refactor it into a robust and fully comprehensive work.)
+
 # Cloud Computing Project
 
 ## Scalable and Compatible Real-time IoT Graphics Deep Learning for Traffic Analysis using Cloud Computing 
